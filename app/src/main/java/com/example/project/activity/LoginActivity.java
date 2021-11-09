@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView = (EditText) findViewById(R.id.login_password);
         mEmailLoginButton = (Button) findViewById(R.id.login_button);
         mJoinButton = (Button) findViewById(R.id.join_button);
-//        mProgressView = (ProgressBar) findViewById(R.id.login_progress);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -68,17 +67,6 @@ public class LoginActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        // 패스워드의 유효성 검사
-        if (password.isEmpty()) {
-            mPasswordView.setError("비밀번호를 입력해주세요.");
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError("6자 이상의 비밀번호를 입력해주세요.");
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
         // 이메일의 유효성 검사
         if (email.isEmpty()) {
             mEmailView.setError("이메일을 입력해주세요.");
@@ -90,11 +78,22 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
+
+        // 패스워드의 유효성 검사
+        if (password.isEmpty()) {
+            mPasswordView.setError("비밀번호를 입력해주세요.");
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!isPasswordValid(password)) {
+            mPasswordView.setError("6자 이상의 비밀번호를 입력해주세요.");
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         if (cancel) {
             focusView.requestFocus();
         } else {
             startLogin(new LoginData(email, password));
-            showProgress(true);
         }
     }
 
@@ -104,14 +103,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse result = response.body();
                 Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
-                showProgress(false);
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "로그인 에러 발생", Toast.LENGTH_SHORT).show();
                 Log.e("로그인 에러 발생", t.getMessage());
-                showProgress(false);
             }
         });
     }

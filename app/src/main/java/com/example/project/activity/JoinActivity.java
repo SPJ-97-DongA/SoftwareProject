@@ -18,17 +18,18 @@ import com.example.project.data.JoinResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class JoinActivity extends AppCompatActivity {
 
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView;
     private EditText mPasswordView;
+    private EditText mPasswordViewConfirm;
     private EditText mNameView;
     private Button mJoinButton;
-    private ProgressBar mProgressView;
     private ServiceApi service;
 
     @Override
@@ -36,11 +37,11 @@ public class JoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.join_email);
+        mEmailView = (EditText) findViewById(R.id.join_email);
         mPasswordView = (EditText) findViewById(R.id.join_password);
+        mPasswordViewConfirm = (EditText) findViewById(R.id.join_password_confirm);
         mNameView = (EditText) findViewById(R.id.join_name);
         mJoinButton = (Button) findViewById(R.id.join_button);
-        mProgressView = (ProgressBar) findViewById(R.id.join_progress);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -56,22 +57,28 @@ public class JoinActivity extends AppCompatActivity {
         mNameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mPasswordViewConfirm.setError(null);
 
         String name = mNameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        String passwordConfirm = mPasswordViewConfirm.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // 패스워드의 유효성 검사
         if (password.isEmpty()) {
-            mEmailView.setError("비밀번호를 입력해주세요.");
-            focusView = mEmailView;
+            mPasswordView.setError("비밀번호를 입력해주세요.");
+            focusView = mPasswordView;
             cancel = true;
         } else if (!isPasswordValid(password)) {
             mPasswordView.setError("6자 이상의 비밀번호를 입력해주세요.");
             focusView = mPasswordView;
+            cancel = true;
+        } else if(!password.equals(passwordConfirm)){
+            mPasswordViewConfirm.setError("비밀번호를 다시 확인해주세요.");
+            focusView = mPasswordViewConfirm;
             cancel = true;
         }
 
@@ -93,25 +100,26 @@ public class JoinActivity extends AppCompatActivity {
             cancel = true;
         }
 
+
         if (cancel) {
             focusView.requestFocus();
         } else {
             startJoin(new JoinData(name, email, password));
-            showProgress(true);
         }
     }
 
     private void startJoin(JoinData data) {
         service.userJoin(data).enqueue(new Callback<JoinResponse>() {
+
             @Override
             public void onResponse(Call<JoinResponse> call, Response<JoinResponse> response) {
-                JoinResponse result = response.body();
-                Toast.makeText(JoinActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
-                showProgress(false);
+                    JoinResponse result = response.body();
+                    Toast.makeText(JoinActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
 
-                if (result.getCode() == 200) {
-                    finish();
-                }
+                    if (result.getCode() == 200) {
+                        finish();
+                    }
+
             }
 
             @Override
@@ -119,7 +127,6 @@ public class JoinActivity extends AppCompatActivity {
                 Toast.makeText(JoinActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
                 Log.e("회원가입 에러 발생", t.getMessage());
                 t.printStackTrace();
-                showProgress(false);
             }
         });
     }
@@ -130,10 +137,6 @@ public class JoinActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         return password.length() >= 6;
-    }
-
-    private void showProgress(boolean show) {
-        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
 }
