@@ -165,6 +165,7 @@
             android:layout_weight="0.1">
         </LinearLayout>
         <Button
+            android:id="@+id/cancel_button"
             android:background="#BFEAFF"
             android:textSize="22sp"
             android:text="취소"

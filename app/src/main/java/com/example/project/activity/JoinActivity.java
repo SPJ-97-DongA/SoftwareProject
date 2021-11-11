@@ -30,6 +30,7 @@ public class JoinActivity extends AppCompatActivity {
     private EditText mPasswordViewConfirm;
     private EditText mNameView;
     private Button mJoinButton;
+    private Button mCancelButton;
     private ServiceApi service;
 
     @Override
@@ -42,13 +43,21 @@ public class JoinActivity extends AppCompatActivity {
         mPasswordViewConfirm = (EditText) findViewById(R.id.join_password_confirm);
         mNameView = (EditText) findViewById(R.id.join_name);
         mJoinButton = (Button) findViewById(R.id.join_button);
-
+        mCancelButton = (Button) findViewById(R.id.cancel_button);
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
         mJoinButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 attemptJoin();
+            }
+        });
+
+        mCancelButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -119,7 +128,6 @@ public class JoinActivity extends AppCompatActivity {
                     if (result.getCode() == 200) {
                         finish();
                     }
-
             }
 
             @Override

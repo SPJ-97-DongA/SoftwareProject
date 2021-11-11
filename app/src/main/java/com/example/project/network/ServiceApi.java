@@ -18,4 +18,6 @@ public interface ServiceApi {
 
     @POST("/user/join")
     Call<JoinResponse> userJoin(@Body JoinData data);
+
+
 }
