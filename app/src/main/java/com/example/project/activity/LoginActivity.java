@@ -3,6 +3,7 @@ package com.example.project.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.example.project.data.LoginResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private Button mEmailLoginButton;
     private Button mJoinButton;
-    private ProgressBar mProgressView;
     private ServiceApi service;
 
     @Override
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
+
         mJoinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,20 +75,12 @@ public class LoginActivity extends AppCompatActivity {
             mEmailView.setError("이메일을 입력해주세요.");
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError("@를 포함한 유효한 이메일을 입력해주세요.");
-            focusView = mEmailView;
-            cancel = true;
         }
 
 
         // 패스워드의 유효성 검사
         if (password.isEmpty()) {
             mPasswordView.setError("비밀번호를 입력해주세요.");
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError("6자 이상의 비밀번호를 입력해주세요.");
             focusView = mPasswordView;
             cancel = true;
         }
@@ -103,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 LoginResponse result = response.body();
                 Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
 
             @Override
@@ -121,7 +119,4 @@ public class LoginActivity extends AppCompatActivity {
         return password.length() >= 6;
     }
 
-    private void showProgress(boolean show) {
-        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
 }

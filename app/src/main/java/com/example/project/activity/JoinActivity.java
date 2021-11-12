@@ -1,7 +1,9 @@
 package com.example.project.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import com.example.project.data.JoinData;
 import com.example.project.data.JoinResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
+
+import java.util.regex.Pattern;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -76,31 +80,41 @@ public class JoinActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        // 패스워드의 유효성 검사
-        if (password.isEmpty()) {
-            mPasswordView.setError("비밀번호를 입력해주세요.");
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (!isPasswordValid(password)) {
-            mPasswordView.setError("6자 이상의 비밀번호를 입력해주세요.");
-            focusView = mPasswordView;
-            cancel = true;
-        } else if(!password.equals(passwordConfirm)){
-            mPasswordViewConfirm.setError("비밀번호를 다시 확인해주세요.");
-            focusView = mPasswordViewConfirm;
-            cancel = true;
-        }
 
         // 이메일의 유효성 검사
         if (email.isEmpty()) {
             mEmailView.setError("이메일을 입력해주세요.");
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError("@를 포함한 유효한 이메일을 입력해주세요.");
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mEmailView.setError("유효한 이메일을 입력해주세요.");
             focusView = mEmailView;
             cancel = true;
         }
+
+        // 패스워드의 유효성 검사
+        if (password.isEmpty()) {
+            mPasswordView.setError("비밀번호를 입력해주세요.");
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!Pattern.matches("^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-zA-Z]).{8,20}$", password)) {
+            mPasswordView.setError("8~20자 영문 대 소문자, 숫자, 특수문자를 사용하세요.");
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
+
+        if(passwordConfirm.isEmpty()) {
+            mPasswordView.setError("필수 정보입니다.");
+            focusView = mPasswordViewConfirm;
+            cancel = true;
+        }
+        else if(!password.equals(passwordConfirm)){
+            mPasswordViewConfirm.setError("비밀번호를 다시 확인해주세요.");
+            focusView = mPasswordViewConfirm;
+            cancel = true;
+        }
+
 
         // 이름의 유효성 검사
         if (name.isEmpty()) {
