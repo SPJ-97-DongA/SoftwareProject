@@ -50,20 +50,9 @@ public class JoinActivity extends AppCompatActivity {
         mCancelButton = (Button) findViewById(R.id.cancel_button);
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
-        mJoinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                attemptJoin();
-            }
-        });
+        mJoinButton.setOnClickListener(v -> attemptJoin());
 
-        mCancelButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        mCancelButton.setOnClickListener(v -> finish());
     }
 
     private void attemptJoin() {
@@ -151,14 +140,6 @@ public class JoinActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-    }
-
-    private boolean isEmailValid(String email) {
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        return password.length() >= 6;
     }
 
 }

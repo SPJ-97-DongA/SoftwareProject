@@ -3,13 +3,9 @@ package com.example.project.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +16,6 @@ import com.example.project.data.LoginResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,19 +39,11 @@ public class LoginActivity extends AppCompatActivity {
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
-        mEmailLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
+        mEmailLoginButton.setOnClickListener(view -> attemptLogin());
 
-        mJoinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
-                startActivity(intent);
-            }
+        mJoinButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -109,14 +96,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e("로그인 에러 발생", t.getMessage());
             }
         });
-    }
-
-    private boolean isEmailValid(String email) {
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        return password.length() >= 6;
     }
 
 }
