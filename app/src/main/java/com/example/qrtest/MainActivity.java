@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     int sum;
     //view Objects
     private Button buttonScan;
-    private TextView textViewPoint, textViewResult;
+    private TextView textViewPoint;
     //qr code scanner object
     private IntentIntegrator qrScan;
 
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         //View Objects
         buttonScan = (Button) findViewById(R.id.buttonScan);
         textViewPoint = (TextView) findViewById(R.id.textViewPoint);
-        textViewResult = (TextView)  findViewById(R.id.textViewResult);
         textViewPoint.setText(point);
         //intializing scan object
         qrScan = new IntentIntegrator(this);
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     //Toast.makeText(MainActivity.this, result.getContents(), Toast.LENGTH_LONG).show();
-                    textViewResult.setText(result.getContents());
                 }
             }
 
