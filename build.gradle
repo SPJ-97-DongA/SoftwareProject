@@ -18,7 +18,7 @@ allprojects {
         jcenter()
         maven {
             url 'https://naver.jfrog.io/artifactory/maven/'
-        }
+        }//map추가
     }
 }
 
