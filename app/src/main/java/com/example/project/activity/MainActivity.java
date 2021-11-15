@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,13 +22,22 @@ public class MainActivity extends AppCompatActivity {
     private FragmentMypage fragmentMypage = new FragmentMypage();
     private FragmentMap fragmentMap = new FragmentMap();
 
+    private Intent intent;
+    private Bundle bundle = new Bundle();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        intent = getIntent();
+
+        bundle.putString("name", intent.getStringExtra("name"));
+        bundle.putString("email", intent.getStringExtra("email"));
+        bundle.putInt("point", intent.getIntExtra("point", 0));
+
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragmentHome).commit();
-
+        fragmentHome.setArguments(bundle);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case R.id.homeItem:
                         return connectTofragment(fragmentHome);
-                    case R.id.qrItem:
+                    case R.id.boardItem:
                         return connectTofragment(fragmentBoard);
                     case R.id.mypageItem:
                         return connectTofragment(fragmentMypage);
@@ -52,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean connectTofragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();
+        fragment.setArguments(bundle);
+
         return true;
     }
 

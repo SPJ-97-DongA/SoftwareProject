@@ -13,6 +13,9 @@ public class LoginResponse {
     @SerializedName("userName")
     private String userName;
 
+    @SerializedName("point")
+    private int point;
+
     public int getCode() {
         return code;
     }
@@ -23,5 +26,9 @@ public class LoginResponse {
 
     public String getUserName() {
         return userName;
+    }
+
+    public int getPoint() {
+        return point;
     }
 }

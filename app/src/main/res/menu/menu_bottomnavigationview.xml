@@ -7,14 +7,14 @@
         android:icon="@drawable/home_icon"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/qrItem"
-        android:title="QR"
+        android:id="@+id/boardItem"
+        android:title="게시판"
         android:icon="@drawable/qr_icon"
         app:showAsAction="always">
     </item>
     <item
         android:id="@+id/mypageItem"
-        android:title="MyPage"
+        android:title="마이페이지"
         android:icon="@drawable/mypage_icon"
         app:showAsAction="always">
     </item>

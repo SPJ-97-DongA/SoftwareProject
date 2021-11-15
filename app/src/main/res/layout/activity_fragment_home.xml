@@ -7,8 +7,7 @@
     android:background="#0851E3"
     tools:context=".fragment.FragmentHome">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,6 +21,15 @@
             android:text="메인 프래그먼트"
             android:textColor="#FFFFFF"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="#3F51B5"
+            android:text="안녕하세요"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/qrButton"

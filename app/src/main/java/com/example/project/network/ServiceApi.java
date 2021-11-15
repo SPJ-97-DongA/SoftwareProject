@@ -1,5 +1,6 @@
 package com.example.project.network;
 
+import com.example.project.data.BoardResponse;
 import com.example.project.data.JoinData;
 import com.example.project.data.JoinResponse;
 import com.example.project.data.LoginData;
@@ -19,5 +20,7 @@ public interface ServiceApi {
     @POST("/user/join")
     Call<JoinResponse> userJoin(@Body JoinData data);
 
+//    @POST("/board")
+//    Call<BoardResponse> boardList
 
 }

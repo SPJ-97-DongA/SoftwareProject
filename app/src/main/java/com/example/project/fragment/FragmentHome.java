@@ -18,14 +18,19 @@ public class FragmentHome extends Fragment {
 
     private Button mQrButton;
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_fragment_home, container, false);
 
-        mQrButton = rootView.findViewById(R.id.qrButton);
+        Bundle bundle = getArguments();
 
+        mQrButton = rootView.findViewById(R.id.qrButton);
         mQrButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), QrActivity.class);
+
+            intent.putExtra("point", bundle.getInt("point"));
+
             startActivity(intent);
         });
 

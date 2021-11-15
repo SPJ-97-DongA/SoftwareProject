@@ -86,7 +86,12 @@ public class LoginActivity extends AppCompatActivity {
                 LoginResponse result = response.body();
                 Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+                intent.putExtra("email", mEmailView.getText().toString());
+                intent.putExtra("name", result.getUserName());
+                intent.putExtra("point", result.getPoint());
+
                 startActivity(intent);
             }
 
