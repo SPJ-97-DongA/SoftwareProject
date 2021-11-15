@@ -2,6 +2,7 @@ package com.example.project.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,16 +23,21 @@ public class QrActivity extends AppCompatActivity {
 
     private Intent intent;
 
+    private String email;
+
     private int point;
 
-    TextView textViewpoint;
+    TextView mUserPoint;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUserPoint = (TextView) findViewById(R.id.userPoint);
 
         intent = getIntent();
+
+        email = intent.getStringExtra("email");
         point = intent.getIntExtra("point", 0);
 
         qrScan = new IntentIntegrator(this);
@@ -39,7 +45,6 @@ public class QrActivity extends AppCompatActivity {
         qrScan.setPrompt("QR 스캔중..");
 
         qrScan.initiateScan();
-        textViewpoint = (TextView) findViewById(R.id.textView2);
     }
 
     @Override
@@ -48,111 +53,45 @@ public class QrActivity extends AppCompatActivity {
 
         if (result != null) {
             //qrcode 가 없으면
+
             if (result.getContents() == null) {
                 Toast.makeText(QrActivity.this, "취소!", Toast.LENGTH_SHORT).show();
+
             } else {
-                //qrcode 결과가 있으면
-                Toast.makeText(QrActivity.this, "스캔완료!", Toast.LENGTH_SHORT).show();
-
+                JSONObject obj = null;
                 try {
-                    JSONObject obj = new JSONObject(result.getContents());
+                    obj = new JSONObject(result.getContents());
 
-
-                    if(obj.getString("difficulty") == "1")
-                    {
+                    if (obj.getString("difficulty").equals("1")) {
                         point += 1000;
-                    }
-                    else if(obj.getString("difficulty") == "2")
-                    {
+                    } else if (obj.getString("difficulty").equals("2")) {
                         point += 2000;
-                    }
-                    else if(obj.getString("difficulty") == "3")
-                    {
+                    } else if (obj.getString("difficulty").equals("3")) {
                         point += 3000;
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                Toast.makeText(QrActivity.this, "스캔완료!", Toast.LENGTH_SHORT).show();
             }
+
+
+
+            if(data != null) {
+                data.putExtra("email", email);
+                data.putExtra("point", point);
+            }
+
+            setResult(resultCode, data);
+            finish();
 
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-
-        finish();
     }
 
 
-
 }
-//package com.example.project.activity;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.widget.Toast;
-//
-//import androidx.annotation.Nullable;
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import com.google.zxing.integration.android.IntentIntegrator;
-//import com.google.zxing.integration.android.IntentResult;
-//
-//import org.json.JSONException;
-//import org.json.JSONObject;
-//
-//
-//public class QrActivity extends AppCompatActivity {
-//
-//    private IntentIntegrator qrScan;
-//
-//
-//    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        qrScan = new IntentIntegrator(this);
-//        qrScan.setOrientationLocked(false);
-//        qrScan.setPrompt("QR 스캔중..");
-//
-//        qrScan.initiateScan();
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-//
-//        if (result != null) {
-//            //qrcode 가 없으면
-//            if (result.getContents() == null) {
-//                Toast.makeText(QrActivity.this, "취소!", Toast.LENGTH_SHORT).show();
-//            } else {
-//                //qrcode 결과가 있으면
-//                Toast.makeText(QrActivity.this, "스캔완료!", Toast.LENGTH_SHORT).show();
-//
-//                try {
-//                    JSONObject obj = new JSONObject(result.getContents());
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        } else {
-//            super.onActivityResult(requestCode, resultCode, data);
-//        }
-//
-//        Intent intent = new Intent(this, MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//
-//        finish();
-//    }
-//
-//
-//
-//}

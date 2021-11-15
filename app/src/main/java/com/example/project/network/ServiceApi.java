@@ -5,6 +5,8 @@ import com.example.project.data.JoinData;
 import com.example.project.data.JoinResponse;
 import com.example.project.data.LoginData;
 import com.example.project.data.LoginResponse;
+import com.example.project.data.QrData;
+import com.example.project.data.QrResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,5 +24,8 @@ public interface ServiceApi {
 
 //    @POST("/board")
 //    Call<BoardResponse> boardList
+
+    @POST("/qr/update")
+    Call<QrResponse> qrSuccess(@Body QrData data);
 
 }

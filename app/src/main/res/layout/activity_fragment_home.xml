@@ -23,11 +23,11 @@
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/userPoint"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:background="#3F51B5"
-            android:text="안녕하세요"
+            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="30sp"/>
 

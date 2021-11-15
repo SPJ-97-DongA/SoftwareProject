@@ -1,8 +1,10 @@
 package com.example.project.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +17,7 @@ import com.example.project.fragment.FragmentMypage;
 import com.example.project.fragment.FragmentBoard;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     private FragmentHome fragmentHome = new FragmentHome();
     private FragmentBoard fragmentBoard = new FragmentBoard();
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         intent = getIntent();
+
 
         bundle.putString("name", intent.getStringExtra("name"));
         bundle.putString("email", intent.getStringExtra("email"));
@@ -59,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
 
     private boolean connectTofragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();
