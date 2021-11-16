@@ -37,16 +37,20 @@ public class FragmentHome extends Fragment {
 
     private Button mQrButton;
 
+    private TextView mUserPoint;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_fragment_home, container, false);
 
+        bundle = getArguments();
+
         context = container.getContext();
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
-        bundle = getArguments();
+        mUserPoint = rootView.findViewById(R.id.userPoint);
+        mUserPoint.setText(String.valueOf(bundle.getInt("point")));
 
         mQrButton = rootView.findViewById(R.id.qrButton);
         mQrButton.setOnClickListener(v -> {
@@ -69,6 +73,8 @@ public class FragmentHome extends Fragment {
         if(data != null) {
             QrData qrData = new QrData(data.getStringExtra("email"), data.getIntExtra("point", 0));
             infoUpdate(qrData);
+
+            mUserPoint.setText(String.valueOf(data.getIntExtra("point", 0)));
         }
     }
 
@@ -78,7 +84,7 @@ public class FragmentHome extends Fragment {
             @Override
             public void onResponse(Call<QrResponse> call, Response<QrResponse> response) {
                 QrResponse result = response.body();
-                Toast.makeText(context, result.getMessage(), Toast.LENGTH_SHORT).show();
+                bundle.putInt("point", result.getPoint());
             }
 
             @Override

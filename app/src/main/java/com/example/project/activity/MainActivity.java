@@ -63,10 +63,6 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//    }
 
     private boolean connectTofragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();

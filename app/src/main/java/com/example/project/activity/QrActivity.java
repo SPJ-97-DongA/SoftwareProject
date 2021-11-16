@@ -62,15 +62,11 @@ public class QrActivity extends AppCompatActivity {
                 try {
                     obj = new JSONObject(result.getContents());
 
-                    if (obj.getString("difficulty").equals("1")) {
-                        point += 1000;
-                    } else if (obj.getString("difficulty").equals("2")) {
-                        point += 2000;
-                    } else if (obj.getString("difficulty").equals("3")) {
-                        point += 3000;
-                    }
+                    System.out.println("before : " + point);
 
+                    point += Integer.parseInt(obj.getString("point"));
 
+                    System.out.println("after : " + point);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
