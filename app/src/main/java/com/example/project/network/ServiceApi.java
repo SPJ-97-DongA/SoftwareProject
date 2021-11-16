@@ -25,7 +25,7 @@ public interface ServiceApi {
 //    @POST("/board")
 //    Call<BoardResponse> boardList
 
-    @POST("/qr/update")
+    @POST("/qr/addpoint")
     Call<QrResponse> qrSuccess(@Body QrData data);
 
 }
