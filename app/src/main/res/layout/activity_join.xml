@@ -44,13 +44,21 @@
             android:layout_height="0dp"
             android:layout_weight="1">
         </TextView>
-        <EditText
-            android:id="@+id/join_email"
-            android:background="@drawable/border"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-        </EditText>
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:orientation="vertical">
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:id="@+id/join_email"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </EditText>
+        </LinearLayout>
+
     </LinearLayout>
         <!-- 1.2 -->    <LinearLayout
         android:layout_width="match_parent"
@@ -69,15 +77,21 @@
             android:layout_height="0dp"
             android:layout_weight="1">
         </TextView>
-        <EditText
-            android:inputType="textPassword"
-            android:id="@+id/join_password"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/border"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-        </EditText>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/border">
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:inputType="textPassword"
+                android:id="@+id/join_password"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </EditText>
+        </LinearLayout>
     </LinearLayout>
         <!-- 1.2 -->    <LinearLayout
         android:layout_width="match_parent"
@@ -96,15 +110,22 @@
             android:layout_height="0dp"
             android:layout_weight="1">
         </TextView>
-        <EditText
-            android:inputType="textPassword"
-            android:id="@+id/join_password_confirm"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/border"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-        </EditText>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/border">
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/join_password_confirm"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp">
+            </EditText>
+        </LinearLayout>
+
     </LinearLayout>
         <!-- 1.2 -->    <LinearLayout
         android:layout_width="match_parent"
@@ -123,17 +144,22 @@
             android:layout_height="0dp"
             android:layout_weight="1">
         </TextView>
-        <EditText
-            android:id="@+id/join_name"
-            android:layout_marginTop="2.5dp"
-            android:layout_marginBottom="1dp"
-            android:background="@drawable/border"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-        </EditText>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/border">
+            <EditText
+                android:layout_marginLeft="5dp"
+                android:id="@+id/join_name"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </EditText>
+        </LinearLayout>
     </LinearLayout>
-        <!-- 0.1 -->    <LinearLayout
+        <!-- 0.2 -->    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2">
@@ -180,7 +206,7 @@
             android:layout_weight="0.05">
         </LinearLayout>
     </LinearLayout>
-        <!-- 0.1 -->    <LinearLayout
+        <!-- 0.2 -->    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2">
@@ -188,7 +214,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="2.2"
             android:background="#BFEAFF">
         </LinearLayout>
     </LinearLayout>

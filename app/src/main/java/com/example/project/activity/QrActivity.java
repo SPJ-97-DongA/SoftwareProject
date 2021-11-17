@@ -63,6 +63,7 @@ public class QrActivity extends AppCompatActivity {
                     obj = new JSONObject(result.getContents());
 
                     point += Integer.parseInt(obj.getString("point"));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
