@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
 import com.example.project.data.LoginData;
-import com.example.project.data.LoginResponse;
+import com.example.project.response.LoginResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
@@ -46,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mJoinButton.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
+
             startActivity(intent);
         });
 

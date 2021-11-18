@@ -1,15 +1,11 @@
 package com.example.project.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.Window;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -18,13 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
 import com.example.project.data.JoinData;
-import com.example.project.data.JoinResponse;
+import com.example.project.response.JoinResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
 import java.util.regex.Pattern;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

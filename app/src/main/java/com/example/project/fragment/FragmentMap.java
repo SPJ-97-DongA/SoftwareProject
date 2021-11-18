@@ -20,8 +20,8 @@ import android.content.Context;
 
         import com.example.project.R;
         import com.example.project.data.RegionData;
-        import com.example.project.data.RegionResponse;
-import com.example.project.data.SubregionResponse;
+        import com.example.project.response.RegionResponse;
+import com.example.project.response.SubregionResponse;
 import com.example.project.network.RetrofitClient;
         import com.example.project.network.ServiceApi;
         import com.naver.maps.geometry.LatLng;
@@ -46,8 +46,6 @@ import retrofit2.Call;
 
 
         public class FragmentMap extends Fragment implements OnMapReadyCallback {
-
-            private List<RegionData> regionlist;
 
             private List<String> list;
 
@@ -74,28 +72,8 @@ import retrofit2.Call;
                 service = RetrofitClient.getClient().create(ServiceApi.class);
 
                 list = new ArrayList<>();
-                regionUpdate();
+                regionUpdate(rootView);
 
-                ListView listView = rootView.findViewById(R.id.regionListview);
-
-                // 지역 셋팅 리스트뷰 좌측 띄우기
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
-                listView.setAdapter(adapter);
-                placeListview = rootView.findViewById(R.id.placeListview);
-
-
-                // 다른 광광지 리스트
-                listView.setOnItemClickListener((adapterView, view, position, l) -> {
-                    String data = (String) adapterView.getItemAtPosition(position);
-                    Marker Mark = new Marker();
-
-                    Optional<RegionData> region = regionlist.stream().filter(s -> s.getName().equals(data)).findFirst();
-                    RegionData rg = region.get();
-
-
-                    subregionUpdate(Mark, rg, rg.getLatitude(), rg.getLongitude());
-
-                });
                 mapView = rootView.findViewById(R.id.mapView);
                 mapView.onCreate(savedInstanceState);
                 mapView.getMapAsync(this);
@@ -145,16 +123,39 @@ import retrofit2.Call;
             }
 
             //지역 리스트 호출
-            public void regionUpdate() {
+            public void regionUpdate(ViewGroup rootView) {
                 service.callRegionList().enqueue(new Callback<RegionResponse>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onResponse(Call<RegionResponse> call, Response<RegionResponse> response) {
                         RegionResponse result = response.body();
-                        regionlist = result.getRegionList();
+                        List<RegionData> regionlist = result.getRegionList();
 
-                        for (RegionData data : regionlist) {
-                            list.add(data.getName());
+                        List<String> list = new ArrayList<>();
+
+                        for(RegionData item : regionlist){
+                            list.add(item.getName());
                         }
+
+                        ListView listView = rootView.findViewById(R.id.regionListview);
+
+                        // 지역 셋팅 리스트뷰 좌측 띄우기
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
+                        listView.setAdapter(adapter);
+                        placeListview = rootView.findViewById(R.id.placeListview);
+
+
+                        // 다른 광광지 리스트
+                        listView.setOnItemClickListener((adapterView, view, position, l) -> {
+                            String data = (String) adapterView.getItemAtPosition(position);
+                            Marker Mark = new Marker();
+
+                            Optional<RegionData> region = regionlist.stream().filter(s -> s.getName().equals(data)).findFirst();
+                            RegionData rg = region.get();
+
+                            subregionUpdate(Mark, rg, rg.getLatitude(), rg.getLongitude());
+                        });
+
                     }
 
                     @Override
@@ -174,9 +175,9 @@ import retrofit2.Call;
                     public void onResponse(Call<SubregionResponse> call, Response<SubregionResponse> response) {
                         SubregionResponse result = response.body();
                         List<RegionData> subregionList = result.getSubregionList();
-                       List<String> subregion = new ArrayList<>();
+                        List<String> subregion = new ArrayList<>();
 
-                        for(RegionData item : subregionList){
+                        for (RegionData item : subregionList) {
                             subregion.add(item.getName());
                         }
 
@@ -188,7 +189,7 @@ import retrofit2.Call;
                         placeListview.setOnItemClickListener((adapterView1, view1, position1, l1) -> {
                             String regionName = (String) adapterView1.getItemAtPosition(position1);
 
-                            Optional<RegionData> item = subregionList.stream().filter(s-> s.getName().equals(regionName)).findFirst();
+                            Optional<RegionData> item = subregionList.stream().filter(s -> s.getName().equals(regionName)).findFirst();
                             onMapMove(mark, item.get().getLatitude(), item.get().getLongitude());
                         });
 
