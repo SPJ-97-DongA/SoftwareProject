@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mEmailView = (EditText) findViewById(R.id.login_email);
@@ -45,6 +48,9 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), JoinActivity.class);
             startActivity(intent);
         });
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
     private void attemptLogin() {
