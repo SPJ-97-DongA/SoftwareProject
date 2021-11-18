@@ -18,6 +18,8 @@ import java.util.List;
 
 public class FragmentBoard extends Fragment {
     private ListView dashboardListview;
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_fragment_board, container, false);
         dashboardListview = rootView.findViewById(R.id.dashboardListview);
@@ -46,5 +48,6 @@ public class FragmentBoard extends Fragment {
 
         return rootView;
     }
+
 
 }
