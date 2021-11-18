@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
@@ -39,6 +41,7 @@ public class JoinActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
@@ -53,6 +56,9 @@ public class JoinActivity extends AppCompatActivity {
         mJoinButton.setOnClickListener(v -> attemptJoin());
 
         mCancelButton.setOnClickListener(v -> finish());
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
     private void attemptJoin() {
