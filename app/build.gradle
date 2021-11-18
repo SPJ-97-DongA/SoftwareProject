@@ -56,4 +56,7 @@ dependencies {
 
     implementation 'com.naver.maps:map-sdk:3.9.0'//map추가
     implementation 'com.google.android.gms:play-services-location:17.1.0'//map추가
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:26.1.0' // 플로팅 버튼 추가
 }
