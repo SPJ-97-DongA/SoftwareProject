@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.project.R;
+import com.example.project.activity.RegisterActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentBoard extends Fragment {
     private ListView dashboardListview;
+    private FloatingActionButton writeButton;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_fragment_board, container, false);
         dashboardListview = rootView.findViewById(R.id.dashboardListview);
@@ -43,6 +47,15 @@ public class FragmentBoard extends Fragment {
         // 지역 셋팅 리스트뷰 좌측 띄우기
         ArrayAdapter<String> adpater = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, list);
         dashboardListview.setAdapter(adpater);
+
+        writeButton = rootView.findViewById(R.id.writeButton);
+        writeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), RegisterActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         return rootView;
     }
