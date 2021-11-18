@@ -49,6 +49,7 @@
         </ListView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:src="@drawable/write_icon"
+            android:id="@+id/writeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
