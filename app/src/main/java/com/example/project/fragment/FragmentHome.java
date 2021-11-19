@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 import com.example.project.R;
 import com.example.project.activity.QrActivity;
 import com.example.project.data.QrData;
-import com.example.project.data.QrResponse;
+import com.example.project.response.QrResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
