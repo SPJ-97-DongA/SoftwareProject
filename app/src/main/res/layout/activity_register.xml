@@ -13,16 +13,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="horizontal"
             android:weightSum="10">
-            <ImageButton
-                android:id="@+id/crossButton"
-                android:background="@drawable/cross_icon"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5">
-            </ImageButton>
+                android:layout_weight="1.5"
+                android:orientation="vertical"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5">
+                    </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/crossButton"
+                        android:background="@drawable/cross_icon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5">
+                    </ImageButton>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5">
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+                </LinearLayout>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -31,7 +68,8 @@
             <TextView
                 android:gravity="center_vertical"
                 android:text="게시글 작성"
-                android:textSize="25sp"
+                android:textColor="#000000"
+                android:textSize="20sp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5.5">
@@ -41,38 +79,82 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5">
             </LinearLayout>
-            <Button
-                android:id="@+id/submitButton"
-                android:text="완료"
-                android:background="#FFFFFF"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2">
-            </Button>
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5">
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5">
+                    </LinearLayout>
+                    <Button
+                        android:backgroundTint="#ED3B3B"
+                        android:textColor="#ffffff"
+                        android:textSize="11sp"
+                        android:id="@+id/submitButton"
+                        android:text="완료"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7">
+                    </Button>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5">
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5">
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
         <EditText
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="제목">
+            android:hint="제목">
         </EditText>
         <TextView
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:text="내용"
+            android:textColor="#000000"
             android:gravity="center_vertical">
         </TextView>
         <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6.9"
             android:orientation="vertical"
             android:background="@drawable/border">
             <EditText
+                android:layout_marginLeft="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null">
+                android:background="@null"
+                android:gravity="top">
             </EditText>
         </LinearLayout>
         <LinearLayout

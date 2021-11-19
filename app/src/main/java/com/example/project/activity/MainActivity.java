@@ -63,7 +63,8 @@ public class MainActivity extends FragmentActivity {
         });
 
         mMyPage.setOnClickListener(v -> {
-
+            intent = new Intent(getApplicationContext(), MypageActivity.class);
+            startActivity(intent);
         });
 
     }
