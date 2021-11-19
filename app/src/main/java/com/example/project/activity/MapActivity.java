@@ -3,15 +3,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -59,23 +55,23 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private ServiceApi service;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public View onCreate(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_map);
 
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_fragment_map, container, false);
-        context = container.getContext();
+        context = getApplicationContext();
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
         list = new ArrayList<>();
-        regionUpdate(rootView);
+        regionUpdate();
 
-        mapView = rootView.findViewById(R.id.mapView);
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-        return rootView;
+
     }
 
     //위치정보 권한 설정
@@ -118,7 +114,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     //지역 리스트 호출
-    public void regionUpdate(ViewGroup rootView) {
+    public void regionUpdate() {
         service.callRegionList().enqueue(new Callback<RegionResponse>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -132,12 +128,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     list.add(item.getName());
                 }
 
-                ListView listView = rootView.findViewById(R.id.regionListview);
+                ListView listView = findViewById(R.id.regionListview);
 
                 // 지역 셋팅 리스트뷰 좌측 띄우기
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
                 listView.setAdapter(adapter);
-                placeListview = rootView.findViewById(R.id.placeListview);
+                placeListview = findViewById(R.id.placeListview);
 
 
                 // 다른 광광지 리스트
@@ -198,4 +194,4 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 }
-}
+

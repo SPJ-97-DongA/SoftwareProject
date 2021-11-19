@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
 import com.example.project.data.LoginData;
+import com.example.project.data.UserData;
 import com.example.project.response.LoginResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
@@ -92,13 +93,12 @@ public class LoginActivity extends AppCompatActivity {
                 LoginResponse result = response.body();
                 Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
 
+                UserData userInfo = new UserData(mEmailView.getText().toString(), result.getUserName(), result.getPoint());
+
                 if(result.getCode() == 200) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                    intent.putExtra("email", mEmailView.getText().toString());
-                    intent.putExtra("name", result.getUserName());
-                    intent.putExtra("point", result.getPoint());
-
+                    intent.putExtra("userInfo", userInfo);
                     startActivity(intent);
                 }
             }
