@@ -10,12 +10,174 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8">
+        android:layout_weight="1">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:weightSum="10"
+        android:orientation="vertical"
+        android:background="@drawable/border">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_weight="3">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+            </LinearLayout>
+            <TextView
+                android:text="안명수"
+                android:textSize="25sp"
+                android:textColor="#000000"
+                android:id="@+id/mypageId"
+                android:gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_weight="1.5">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+            </LinearLayout>
+            <TextView
+                android:id="@+id/mypageEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:text="elfn7397@naver.com"
+                android:textColor="#000000">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:weightSum="10"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.3"
+                android:text="POINT :"
+                android:textColor="#000000"
+                android:gravity="center_vertical">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:id="@+id/mypagePoint"
+                android:gravity="center_vertical"
+                android:text="15P"
+                android:textColor="#000000">
+            </TextView>
+            <Button
+                android:id="@+id/mypageSubmit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:text="사용하기">
+            </Button>
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="1">
     </LinearLayout>
-    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.5"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="5"
+        android:orientation="vertical"
+        android:background="@drawable/border">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="계정 관리"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+        </TextView>
+        <TextView
+            android:id="@+id/mypageChangeName"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="닉네임 변경"
+            android:textSize="25sp">
+        </TextView>
+        <TextView
+            android:id="@+id/mypageChangePw"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="비밀번호 변경"
+            android:textSize="25sp">
+        </TextView>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="회원탈퇴"
+            android:textSize="25sp">
+        </TextView>
+        <TextView
+            android:id="@+id/mypageLogout"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="로그아웃"
+            android:textSize="25sp">
+        </TextView>
+    </LinearLayout>
+
+
 </LinearLayout>

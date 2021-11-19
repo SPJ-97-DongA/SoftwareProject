@@ -2,6 +2,7 @@ package com.example.project.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -71,6 +72,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapView.getMapAsync(this);
 
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
     }
 
