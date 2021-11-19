@@ -1,74 +1,102 @@
 package com.example.project.activity;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.project.R;
-import com.example.project.fragment.FragmentHome;
-import com.example.project.fragment.FragmentMap;
-import com.example.project.fragment.FragmentMypage;
-import com.example.project.fragment.FragmentBoard;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.project.data.QrData;
+import com.example.project.data.UserData;
+import com.example.project.network.RetrofitClient;
+import com.example.project.network.ServiceApi;
+import com.example.project.response.QrResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends FragmentActivity {
 
-//    private FragmentHome fragmentHome = new FragmentHome();
-//    private FragmentBoard fragmentBoard = new FragmentBoard();
-//    private FragmentMypage fragmentMypage = new FragmentMypage();
-//    private FragmentMap fragmentMap = new FragmentMap();
-//
-//    private Intent intent;
-//    private Bundle bundle = new Bundle();
+    private ImageButton mSearch;
+    private ImageButton mMap;
+    private ImageButton mQr;
+    private ImageButton mMyPage;
+
+    private UserData userInfo;
+
+    private Intent intent;
+    private ServiceApi service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-//        intent = getIntent();
-//
-//
-//        bundle.putString("name", intent.getStringExtra("name"));
-//        bundle.putString("email", intent.getStringExtra("email"));
-//        bundle.putInt("point", intent.getIntExtra("point", 0));
-//
-//        setContentView(R.layout.activity_main);
-//        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragmentHome).commit();
-//        fragmentHome.setArguments(bundle);
-//
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId())
-//                {
-//                    case R.id.homeItem:
-//                        return connectTofragment(fragmentHome);
-//                    case R.id.boardItem:
-//                        return connectTofragment(fragmentBoard);
-//                    case R.id.mypageItem:
-//                        return connectTofragment(fragmentMypage);
-//                    case R.id.mapItem:
-//                        return connectTofragment(fragmentMap);
-//                }
-//
-//                return false;
-//            }
-//        });
+        service = RetrofitClient.getClient().create(ServiceApi.class);
+        intent = getIntent();
+        userInfo = (UserData) intent.getSerializableExtra("userInfo");
+
+
+        mSearch = findViewById(R.id.mainSearch);
+        mMap = findViewById(R.id.mainMap);
+        mQr = findViewById(R.id.mainQr);
+        mMyPage = findViewById(R.id.mainMypage);
+
+        mSearch.setOnClickListener(v -> {
+        });
+
+        mMap.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), MapActivity.class);
+            startActivity(intent);
+        });
+
+        mQr.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), QrActivity.class);
+            intent.putExtra("userInfo", userInfo);
+
+            startActivityForResult(intent, 0);
+        });
+
+        mMyPage.setOnClickListener(v -> {
+
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(data != null) {
+            UserData userInfo = (UserData) data.getSerializableExtra("userInfo");
+
+            this.userInfo.setPoint(userInfo.getPoint());
+            QrData qrData = new QrData(userInfo.getEmail(), userInfo.getPoint());
+            infoUpdate(qrData);
         }
-//
-//
-//    private boolean connectTofragment(Fragment fragment){
-//        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment).commit();
-//        fragment.setArguments(bundle);
-//
-//        return true;
-//    }
+    }
+
+
+    public void infoUpdate(QrData qrdata){
+        service.qrSuccess(qrdata).enqueue(new Callback<QrResponse>() {
+            @Override
+            public void onResponse(Call<QrResponse> call, Response<QrResponse> response) {
+                QrResponse result = response.body();
+
+                getIntent().putExtra("userInfo", userInfo);
+            }
+
+            @Override
+            public void onFailure(Call<QrResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "포인트 갱신 실패!", Toast.LENGTH_SHORT).show();
+                Log.e("포인트 갱신 실패!", t.getMessage());
+            }
+        });
+    }
 
 }
