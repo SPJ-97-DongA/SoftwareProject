@@ -48,6 +48,8 @@ public class MainActivity extends FragmentActivity {
         mMyPage = findViewById(R.id.mainMypage);
 
         mSearch.setOnClickListener(v -> {
+            intent = new Intent(getApplicationContext(), BoardActivity.class);
+            startActivity(intent);
         });
 
         mMap.setOnClickListener(v -> {
