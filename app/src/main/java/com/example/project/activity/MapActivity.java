@@ -120,6 +120,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     //지역 리스트 호출
     public void regionUpdate() {
         service.callRegionList().enqueue(new Callback<RegionResponse>() {
+
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<RegionResponse> call, Response<RegionResponse> response) {

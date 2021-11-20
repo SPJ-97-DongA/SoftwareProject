@@ -1,17 +1,16 @@
 package com.example.project.response;
 
-import com.example.project.data.RegionData;
+import com.example.project.data.PostData;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class ListupResponse {
 
-
     @SerializedName("boardList")
-    List<RegionData> boardList;
+    List<PostData> boardList;
 
-    public List<RegionData> getBoardList() {
+    public List<PostData> getBoardList() {
         return boardList;
     }
 }

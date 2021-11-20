@@ -15,12 +15,9 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.MemberActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.BoardListActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
         <activity
             android:name=".activity.BoardActivity"
             android:exported="false" />

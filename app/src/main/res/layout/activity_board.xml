@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.BoardActivity"
+    tools:context=".activity.board.BoardActivity"
     android:orientation="vertical"
     android:weightSum="10">
     <LinearLayout
@@ -65,7 +65,8 @@
             android:layout_weight="0.5">
         </LinearLayout>
         <TextView
-            android:text="자유게시판"
+            android:id="@+id/boardType"
+            android:text=""
             android:gravity="center_vertical"
             android:textColor="#000000"
             android:textSize="22sp"

@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.project.R;
+import com.example.project.activity.board.BoardActivity;
 import com.example.project.data.QrData;
 import com.example.project.data.UserData;
 import com.example.project.network.RetrofitClient;
@@ -26,6 +27,10 @@ public class MainActivity extends FragmentActivity {
     private ImageButton mMap;
     private ImageButton mQr;
     private ImageButton mMyPage;
+
+    private ImageButton mfreeBD;
+    private ImageButton mregionInfoBD;
+    private ImageButton mpointBD;
 
     private UserData userInfo;
 
@@ -47,6 +52,10 @@ public class MainActivity extends FragmentActivity {
         mQr = findViewById(R.id.mainQr);
         mMyPage = findViewById(R.id.mainMypage);
 
+        mfreeBD = findViewById(R.id.freePlus);
+        mregionInfoBD = findViewById(R.id.regionPlus);
+        mpointBD = findViewById(R.id.pointPlus);
+
         mSearch.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), BoardActivity.class);
             startActivity(intent);
@@ -66,6 +75,22 @@ public class MainActivity extends FragmentActivity {
 
         mMyPage.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), MypageActivity.class);
+            intent.putExtra("userInfo", userInfo);
+            startActivity(intent);
+        });
+
+        mfreeBD.setOnClickListener(v->{
+            BoardIntentSet("free");
+            startActivity(intent);
+        });
+
+        mregionInfoBD.setOnClickListener(v->{
+            BoardIntentSet("region");
+            startActivity(intent);
+        });
+
+        mpointBD.setOnClickListener(v->{
+            BoardIntentSet("point");
             startActivity(intent);
         });
 
@@ -82,6 +107,12 @@ public class MainActivity extends FragmentActivity {
             QrData qrData = new QrData(userInfo.getEmail(), userInfo.getPoint());
             infoUpdate(qrData);
         }
+    }
+
+    public void BoardIntentSet(String type){
+        intent = new Intent(getApplicationContext(), BoardActivity.class);
+        intent.putExtra("userInfo", userInfo);
+        intent.putExtra("type", type);
     }
 
 
