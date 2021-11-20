@@ -36,19 +36,19 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5">
+                        android:layout_weight="3">
                     </LinearLayout>
                     <ImageButton
                         android:id="@+id/crossButton"
                         android:background="@drawable/cross_icon"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="5">
+                        android:layout_weight="4">
                     </ImageButton>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5">
+                        android:layout_weight="3">
 
                     </LinearLayout>
                 </LinearLayout>
@@ -69,7 +69,7 @@
                 android:gravity="center_vertical"
                 android:text="게시글 작성"
                 android:textColor="#000000"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5.5">
@@ -129,7 +129,7 @@
             android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:hint="제목">
         </EditText>
         <TextView
@@ -162,7 +162,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1">
+            android:layout_weight="0.2">
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,13 +170,17 @@
             android:layout_weight="0.5"
             android:orientation="horizontal"
             android:weightSum="10">
-
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4">
+            </LinearLayout>
             <ImageButton
-                android:id="@+id/cameraButton"
+                android:id="@+id/clipButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.7"
-                android:background="@drawable/camera_icon"></ImageButton>
+                android:background="@drawable/clip_icon"></ImageButton>
         </LinearLayout>
     </LinearLayout>
 

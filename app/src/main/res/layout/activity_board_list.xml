@@ -62,7 +62,7 @@
         <TextView
             android:id="@+id/boardlistName"
             android:gravity="center"
-            android:text=""
+            android:text="게시판 이름"
             android:textColor="#000000"
             android:textSize="17sp"
             android:layout_width="0dp"
@@ -210,7 +210,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.6">
+        android:layout_weight="3.4">
         <TextView
             android:textColor="#000000"
             android:layout_marginLeft="5dp"
@@ -221,16 +221,16 @@
             android:gravity="top">
         </TextView>
     </LinearLayout>
-
+    <ListView
+        android:id="@+id/boardlistListview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+    </ListView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.1"></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="1.1"
         android:orientation="vertical"
         android:weightSum="10">
         <LinearLayout
