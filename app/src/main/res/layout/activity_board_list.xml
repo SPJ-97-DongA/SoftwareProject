@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.BoardListActivity"
+    tools:context=".activity.board.BoardListActivity"
     android:orientation="vertical"
     android:weightSum="10">
     <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/boardlistId"
-            android:text="안명수"
+            android:text=""
             android:gravity="center_vertical">
         </TextView>
     </LinearLayout>
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/boardlistTime"
-            android:text="2021 11 20"
+            android:text=""
             android:gravity="center_vertical">
         </TextView>
     </LinearLayout>
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:id="@+id/boardlistTitle"
             android:gravity="center_vertical"
-            android:text="제목"
+            android:text=""
             android:textColor="#000000">
         </TextView>
     </LinearLayout>
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/boardlistText"
+            android:id="@+id/boardlistContent"
             android:gravity="top">
         </TextView>
     </LinearLayout>

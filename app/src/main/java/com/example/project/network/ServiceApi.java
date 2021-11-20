@@ -1,11 +1,13 @@
 package com.example.project.network;
 
 import com.example.project.data.JoinData;
+import com.example.project.data.PostRegData;
 import com.example.project.response.JoinResponse;
 import com.example.project.data.LoginData;
 import com.example.project.response.ListupResponse;
 import com.example.project.response.LoginResponse;
 import com.example.project.data.QrData;
+import com.example.project.response.PostResponse;
 import com.example.project.response.QrResponse;
 import com.example.project.data.RegionData;
 import com.example.project.response.RegionResponse;
@@ -44,11 +46,13 @@ public interface ServiceApi {
 
     //게시판
     @GET("/board")
-    Call<ListupResponse> ListUP(@Query("type") String type);
+    Call<ListupResponse> ListUP(@Query("type") String type, @Query("end") int end);
 
     @POST("/board/write")
-    Call<ResponseBody> writePOST(@Body String a);
+    Call<ResponseBody> writePOST(@Body PostRegData data);
 
+    @POST("/board/posts")
+    Call<PostResponse> viewPOST(@Body int post_id);
 
 
 }
