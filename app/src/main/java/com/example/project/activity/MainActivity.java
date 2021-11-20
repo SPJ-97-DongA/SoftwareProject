@@ -209,6 +209,7 @@ public class MainActivity extends FragmentActivity {
 
         Intent post_intent = new Intent(getApplicationContext(), BoardListActivity.class);
         post_intent.putExtra("post_id", data.getId());
+        post_intent.putExtra("userInfo", userInfo);
 
         startActivity(post_intent);
     }
