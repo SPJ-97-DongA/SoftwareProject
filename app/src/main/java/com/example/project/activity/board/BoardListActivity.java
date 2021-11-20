@@ -8,9 +8,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.project.R;
@@ -44,6 +50,8 @@ public class BoardListActivity extends AppCompatActivity {
 
     private Button commentSubmit;
 
+    private ImageButton boardlistThreedots;
+
     private int post_id;
     private UserData userInfo;
     private CommentAdapter commentAdapter;
@@ -66,6 +74,17 @@ public class BoardListActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.boardlistTitle);
         mDate = findViewById(R.id.boardlistTime);
         mContents = findViewById(R.id.boardlistContent);
+        boardlistThreedots = findViewById(R.id.boardlistThreedots);
+
+        boardlistThreedots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
+                MenuInflater inf = popupMenu.getMenuInflater();
+                inf.inflate(R.menu.menu_boardlist, popupMenu.getMenu());
+                popupMenu.show();
+            }
+        });
 
 
         commentListView = findViewById(R.id.commentListview);
@@ -81,6 +100,26 @@ public class BoardListActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_boardlist, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId())
+        {
+            case R.id.menuBoardlist1:
+                return true;
+            case R.id.menuBoardlist2:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void viewPOST(int post_id){

@@ -296,22 +296,22 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5">
+                            android:layout_weight="0.5">
                         </LinearLayout>
                         <Button
                             android:backgroundTint="#ED3B3B"
                             android:textColor="#ffffff"
                             android:id="@+id/commentSubmit"
                             android:text="작성"
-                            android:textSize="6sp"
+                            android:textSize="10sp"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="7">
+                            android:layout_weight="8.5">
                         </Button>
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1.5">
+                            android:layout_weight="1">
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
