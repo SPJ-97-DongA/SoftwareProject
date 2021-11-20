@@ -23,6 +23,7 @@ public class BoardListActivity extends AppCompatActivity {
     private TextView mTitle;
     private TextView mDate;
     private TextView mContents;
+    private TextView mBoardName;
 
     private ServiceApi service;
 
@@ -36,6 +37,7 @@ public class BoardListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int post_id = intent.getIntExtra("post_id", 0);
 
+        mBoardName = findViewById(R.id.boardlistName);
         mUsername = findViewById(R.id.boardlistId);
         mTitle = findViewById(R.id.boardlistTitle);
         mDate = findViewById(R.id.boardlistTime);
@@ -49,10 +51,20 @@ public class BoardListActivity extends AppCompatActivity {
 
     public void viewPOST(int post_id){
         service.viewPOST(post_id).enqueue(new Callback<PostResponse>() {
+
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 PostResponse result = response.body();
 
+                String boardName;
+
+                switch(result.getType()){
+                    case "region": boardName = "지역 정보 게시판"; break;
+                    case "point": boardName = "포인트 게시판"; break;
+                    default: boardName = "자유 게시판"; break;
+                }
+
+                mBoardName.setText(boardName);
                 mUsername.setText(result.getWriter());
                 mTitle.setText(result.getTitle());
                 mDate.setText(result.getDateTime());

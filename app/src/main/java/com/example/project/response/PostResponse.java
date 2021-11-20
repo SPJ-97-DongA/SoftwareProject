@@ -19,6 +19,9 @@ public class PostResponse {
     @SerializedName("dateTime")
     Date dateTime;
 
+    @SerializedName("type")
+    String type;
+
     public String getWriter() {
         return writer;
     }
@@ -29,6 +32,10 @@ public class PostResponse {
 
     public String getContents() {
         return contents;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getDateTime() {

@@ -62,7 +62,7 @@
         <TextView
             android:id="@+id/boardlistName"
             android:gravity="center"
-            android:text="게시판 이름"
+            android:text=""
             android:textColor="#000000"
             android:textSize="17sp"
             android:layout_width="0dp"
@@ -221,11 +221,12 @@
             android:gravity="top">
         </TextView>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.1">
-    </LinearLayout>
+        android:layout_weight="3.1"></LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
