@@ -15,17 +15,16 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.MemberActivity"
+            android:name=".activity.board.BoardListActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.BoardListActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:name=".activity.board.BoardActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.MypageActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.board.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
