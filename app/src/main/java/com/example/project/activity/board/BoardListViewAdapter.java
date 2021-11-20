@@ -30,9 +30,7 @@ public class BoardListViewAdapter extends BaseAdapter {
 
 
     @Override
-    public int getCount() {
-        return listViewItemList.size();
-    }
+    public int getCount() { return listViewItemList.size(); }
 
     @Override
     public Object getItem(int position) {
@@ -46,7 +44,6 @@ public class BoardListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

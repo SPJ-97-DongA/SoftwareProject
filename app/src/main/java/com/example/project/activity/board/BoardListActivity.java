@@ -1,18 +1,31 @@
 package com.example.project.activity.board;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.project.R;
+import com.example.project.data.CommentData;
+import com.example.project.data.UserData;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
+import com.example.project.response.CommentResponse;
 import com.example.project.response.PostResponse;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +38,15 @@ public class BoardListActivity extends AppCompatActivity {
     private TextView mContents;
     private TextView mBoardName;
 
+    private ListView commentListView;
+
+    private EditText mComment;
+
+    private Button commentSubmit;
+
+    private int post_id;
+    private UserData userInfo;
+    private CommentAdapter commentAdapter;
     private ServiceApi service;
 
     @Override
@@ -32,10 +54,12 @@ public class BoardListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board_list);
 
+        userInfo = (UserData) getIntent().getSerializableExtra("userInfo");
+        commentAdapter = new CommentAdapter(this);
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
         Intent intent = getIntent();
-        int post_id = intent.getIntExtra("post_id", 0);
+        post_id = intent.getIntExtra("post_id", 0);
 
         mBoardName = findViewById(R.id.boardlistName);
         mUsername = findViewById(R.id.boardlistId);
@@ -43,7 +67,17 @@ public class BoardListActivity extends AppCompatActivity {
         mDate = findViewById(R.id.boardlistTime);
         mContents = findViewById(R.id.boardlistContent);
 
+
+        commentListView = findViewById(R.id.commentListview);
+        commentListView.setAdapter(commentAdapter);
+
+        mComment = findViewById(R.id.boardlistComment);
+        commentSubmit = findViewById(R.id.commentSubmit);
+
         viewPOST(post_id);
+
+        commentSubmit.setOnClickListener(v-> writeComment(new CommentData(post_id, userInfo.getName(), mComment.getText().toString())) );
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -69,12 +103,61 @@ public class BoardListActivity extends AppCompatActivity {
                 mTitle.setText(result.getTitle());
                 mDate.setText(result.getDateTime());
                 mContents.setText(result.getContents());
+
+                commentUpdate(post_id);
             }
 
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
-                Log.e("글 읽기 에러", t.getMessage());
+                Log.e("글 로딩에러", t.getMessage());
+            }
+
+        });
+    }
+
+    public void writeComment(CommentData data){
+        service.writeComment(data).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                commentUpdate(data.getId());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("댓글 작성에러", t.getMessage());
             }
         });
     }
+
+    public void commentUpdate(int post_id){
+        service.commentUpdate(post_id).enqueue(new Callback<CommentResponse>() {
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
+                CommentResponse result = response.body();
+
+                List<CommentData> commentList = result.getCommentList();
+
+
+                if(!commentList.isEmpty()) {
+                    Collections.sort(commentList, Comparator.comparing(CommentData::getCreatedAt));
+
+                    for(CommentData item : commentList) {
+                        if(!commentAdapter.findDup(item))
+                            commentAdapter.addItem(item);
+                    }
+
+                    commentAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CommentResponse> call, Throwable t) {
+                Log.e("댓글 로딩에러", t.getMessage());
+            }
+        });
+    }
+
 }

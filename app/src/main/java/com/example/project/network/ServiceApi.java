@@ -1,7 +1,9 @@
 package com.example.project.network;
 
+import com.example.project.data.CommentData;
 import com.example.project.data.JoinData;
 import com.example.project.data.PostRegData;
+import com.example.project.response.CommentResponse;
 import com.example.project.response.JoinResponse;
 import com.example.project.data.LoginData;
 import com.example.project.response.ListupResponse;
@@ -48,11 +50,15 @@ public interface ServiceApi {
     @GET("/board")
     Call<ListupResponse> ListUP(@Query("type") String type, @Query("end") int end);
 
-    @POST("/board/write")
-    Call<ResponseBody> writePOST(@Body PostRegData data);
-
     @GET("/board/posts")
     Call<PostResponse> viewPOST(@Query("id") int post_id);
 
+    @GET("/board/posts/comment")
+    Call<CommentResponse> commentUpdate(@Query("post_id") int post_id);
 
+    @POST("/board/write")
+    Call<ResponseBody> writePOST(@Body PostRegData data);
+
+    @POST("/board/posts/write")
+    Call<ResponseBody> writeComment(@Body CommentData data);
 }
