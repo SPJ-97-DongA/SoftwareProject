@@ -41,7 +41,6 @@ public class BoardActivity extends AppCompatActivity {
 
     private UserData userInfo;
     private String type;
-    private ListView listView;
 
     private BoardListViewAdapter adapter;
 
@@ -57,7 +56,7 @@ public class BoardActivity extends AppCompatActivity {
 
         adapter = new BoardListViewAdapter(this);
 
-        listView = findViewById(R.id.boardList);
+        ListView listView = findViewById(R.id.boardList);
         listView.setAdapter(adapter);
 
         mboardType = findViewById(R.id.boardType);
