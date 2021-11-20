@@ -51,8 +51,8 @@ public interface ServiceApi {
     @POST("/board/write")
     Call<ResponseBody> writePOST(@Body PostRegData data);
 
-    @POST("/board/posts")
-    Call<PostResponse> viewPOST(@Body int post_id);
+    @GET("/board/posts")
+    Call<PostResponse> viewPOST(@Query("id") int post_id);
 
 
 }
