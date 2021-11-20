@@ -1,5 +1,6 @@
 package com.example.project.activity.board;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -41,6 +42,9 @@ public class BoardListActivity extends AppCompatActivity {
         mContents = findViewById(R.id.boardlistContent);
 
         viewPOST(post_id);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
     public void viewPOST(int post_id){

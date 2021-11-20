@@ -1,16 +1,20 @@
 package com.example.project.activity.board;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+
 import com.example.project.R;
 import com.example.project.data.PostData;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class BoardListViewAdapter extends BaseAdapter {
 
@@ -63,6 +67,11 @@ public class BoardListViewAdapter extends BaseAdapter {
     public void addItem(PostData data){
         System.out.println(data);
         listViewItemList.add(data);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public boolean findID(PostData data){
+        return listViewItemList.stream().anyMatch(item -> item.getId() == data.getId());
     }
 
     public int getSize(){

@@ -1,9 +1,11 @@
 package com.example.project.activity.board;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -119,6 +121,7 @@ public class BoardActivity extends AppCompatActivity {
     // 게시글 목록
     public void listUP(String type, int end){
         service.ListUP(type, end).enqueue(new Callback<ListupResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<ListupResponse> call, Response<ListupResponse> response) {
                 ListupResponse result = response.body();
@@ -126,7 +129,8 @@ public class BoardActivity extends AppCompatActivity {
 
 
                 for(PostData item : boardList){
-                    adapter.addItem(item);
+                    if(!adapter.findID(item))
+                        adapter.addItem(item);
                 }
 
                 adapter.notifyDataSetChanged();
