@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.BoardListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.BoardActivity"
             android:exported="false" />
         <activity
