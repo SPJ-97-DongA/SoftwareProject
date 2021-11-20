@@ -125,7 +125,7 @@
         android:layout_weight="4.5"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:weightSum="5"
+        android:weightSum="4"
         android:orientation="vertical"
         android:background="@drawable/border">
         <TextView
@@ -139,23 +139,13 @@
             android:gravity="center_vertical">
         </TextView>
         <TextView
-            android:id="@+id/mypageChangeName"
+            android:id="@+id/mypageChange"
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="닉네임 변경"
-            android:textSize="25sp">
-        </TextView>
-        <TextView
-            android:id="@+id/mypageChangePw"
-            android:layout_marginLeft="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="비밀번호 변경"
+            android:text="내 정보 변경"
             android:textSize="25sp">
         </TextView>
         <TextView

@@ -193,7 +193,6 @@ public class MainActivity extends FragmentActivity {
         pointList.setAdapter(pointAdapter);
 
 
-        mSearch = findViewById(R.id.mainSearch);
         mMap = findViewById(R.id.mainMap);
         mQr = findViewById(R.id.mainQr);
         mMyPage = findViewById(R.id.mainMypage);

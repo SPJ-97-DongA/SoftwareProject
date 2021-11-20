@@ -39,6 +39,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.QrActivity" />
         <activity android:name=".activity.MapActivity" />
+        <activity android:name=".activity.MemberActivity" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
