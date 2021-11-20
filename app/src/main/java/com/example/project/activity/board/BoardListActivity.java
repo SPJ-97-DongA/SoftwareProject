@@ -6,6 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.project.R;
@@ -23,7 +29,7 @@ public class BoardListActivity extends AppCompatActivity {
     private TextView mTitle;
     private TextView mDate;
     private TextView mContents;
-
+    private ImageButton boardlistThreedots;
     private ServiceApi service;
 
     @Override
@@ -41,12 +47,40 @@ public class BoardListActivity extends AppCompatActivity {
         mDate = findViewById(R.id.boardlistTime);
         mContents = findViewById(R.id.boardlistContent);
 
+        boardlistThreedots = findViewById(R.id.boardlistThreedots);
+        boardlistThreedots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
+                MenuInflater inf = popupMenu.getMenuInflater();
+                inf.inflate(R.menu.menu_boardlist,popupMenu.getMenu());
+                popupMenu.show();
+            }
+        });
         viewPOST(post_id);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_boardlist, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId())
+        {
+            case R.id.menuBoardlist1:
+                return true;
+            case R.id.menuBoardlist2:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public void viewPOST(int post_id){
         service.viewPOST(post_id).enqueue(new Callback<PostResponse>() {
             @Override
