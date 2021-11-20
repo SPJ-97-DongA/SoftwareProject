@@ -67,7 +67,7 @@
             android:textSize="17sp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="7.5">
+            android:layout_weight="6.5">
         </TextView>
         <LinearLayout
             android:layout_width="0dp"
@@ -110,6 +110,47 @@
                 android:layout_weight="2.5">
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="10">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5">
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+                </LinearLayout>
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6"
+                    android:id="@+id/boardlistThreedots"
+                    android:background="@drawable/threedots_icon">
+                </ImageButton>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5">
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,7 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/boardlistId"
-            android:text="안명수"
+            android:text=""
             android:textColor="#000000"
             android:gravity="center_vertical">
         </TextView>
@@ -137,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/boardlistTime"
-            android:text="2021 11 20"
+            android:text=""
             android:gravity="center_vertical">
         </TextView>
     </LinearLayout>
@@ -157,7 +198,7 @@
             android:layout_height="match_parent"
             android:id="@+id/boardlistTitle"
             android:gravity="center_vertical"
-            android:text="제목"
+            android:text=""
             android:textColor="#000000">
         </TextView>
     </LinearLayout>
@@ -173,10 +214,10 @@
         <TextView
             android:textColor="#000000"
             android:layout_marginLeft="5dp"
-            android:text="내용"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/boardlistText"
+            android:id="@+id/boardlistContent"
             android:gravity="top">
         </TextView>
     </LinearLayout>
