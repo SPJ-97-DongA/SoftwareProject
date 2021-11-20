@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 LoginResponse result = response.body();
                 Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
 
-                UserData userInfo = new UserData(mEmailView.getText().toString(), result.getUserName(), result.getPoint());
+                UserData userInfo = new UserData(result.getUserName(), mEmailView.getText().toString(), result.getPoint());
 
                 if(result.getCode() == 200) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

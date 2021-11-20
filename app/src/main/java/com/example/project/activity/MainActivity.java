@@ -64,6 +64,7 @@ public class MainActivity extends FragmentActivity {
 
         mMyPage.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), MypageActivity.class);
+            intent.putExtra("userInfo", userInfo);
             startActivity(intent);
         });
 

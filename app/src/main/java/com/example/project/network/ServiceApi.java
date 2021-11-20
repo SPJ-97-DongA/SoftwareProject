@@ -11,10 +11,13 @@ import com.example.project.data.RegionData;
 import com.example.project.response.RegionResponse;
 import com.example.project.response.SubregionResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ServiceApi {
 
@@ -41,7 +44,10 @@ public interface ServiceApi {
 
     //게시판
     @GET("/board")
-    Call<ListupResponse> ListUP();
+    Call<ListupResponse> ListUP(@Query("type") String type);
+
+    @POST("/board/write")
+    Call<ResponseBody> writePOST(@Body String a);
 
 
 
