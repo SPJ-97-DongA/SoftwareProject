@@ -16,10 +16,14 @@ public class PostRegData {
     @SerializedName("writer")
     String writer;
 
-    public PostRegData(String type, String title, String contents, String writer) {
+    @SerializedName("email")
+    String email;
+
+    public PostRegData(String type, String title, String contents, String writer, String email) {
         this.type = type;
         this.title = title;
         this.contents = contents;
         this.writer = writer;
+        this.email = email;
     }
 }

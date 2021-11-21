@@ -101,19 +101,26 @@ public class BoardListActivity extends AppCompatActivity {
 
         commentSubmit.setOnClickListener(v -> writeComment(new CommentData(post_id, userInfo.getName(), mComment.getText().toString())));
 
+
         //글 삭제, 수정
         boardlistThreedots.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
-            MenuInflater inf = popupMenu.getMenuInflater();
-            inf.inflate(R.menu.menu_boardlist, popupMenu.getMenu());
-            popupMenu.show();
-        });
+            if (postOwner.equals(userInfo.getEmail())) {
+                PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
+                MenuInflater inf = popupMenu.getMenuInflater();
+                inf.inflate(R.menu.menu_boardlist, popupMenu.getMenu());
+                popupMenu.show();
 
+            } else Toast.makeText(this, "올바른 접근권한이 아닙니다.", Toast.LENGTH_SHORT).show();
+        });
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,18 +135,17 @@ public class BoardListActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        if(postOwner.equals(userInfo.getName())) {
             switch (item.getItemId()) {
                 case R.id.menuBoardlist1:
                     return true;
                 case R.id.menuBoardlist2:
                     return true;
             }
-        }else Toast.makeText(this, "올바른 접근권한이 아닙니다.", Toast.LENGTH_SHORT).show();
 
         return super.onOptionsItemSelected(item);
     }
 
+    // 글 불러오기
     public void viewPOST(int post_id){
         service.viewPOST(post_id).enqueue(new Callback<PostResponse>() {
 

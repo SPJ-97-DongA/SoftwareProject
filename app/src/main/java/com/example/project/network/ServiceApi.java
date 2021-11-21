@@ -75,4 +75,8 @@ public interface ServiceApi {
     //댓글 작성하기
     @POST("/board/posts/write")
     Call<ResponseBody> writeComment(@Body CommentData data);
+    
+    //글 수정
+    
+    //글 삭제
 }

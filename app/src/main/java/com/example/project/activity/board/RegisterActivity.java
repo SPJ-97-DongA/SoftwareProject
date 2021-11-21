@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
             UserData userInfo = (UserData) getIntent().getSerializableExtra("userInfo");
             String type = getIntent().getStringExtra("type");
 
-            wirtePOST(new PostRegData(type, title, contents, userInfo.getName()));
+            wirtePOST(new PostRegData(type, title, contents, userInfo.getName(), userInfo.getEmail()));
         });
 
         ActionBar actionBar = getSupportActionBar();
