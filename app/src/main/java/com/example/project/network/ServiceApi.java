@@ -1,25 +1,29 @@
 package com.example.project.network;
 
-import com.example.project.data.CommentData;
-import com.example.project.data.JoinData;
-import com.example.project.data.PostRegData;
-import com.example.project.response.CommentResponse;
-import com.example.project.response.JoinResponse;
-import com.example.project.data.LoginData;
-import com.example.project.response.ListupResponse;
-import com.example.project.response.LoginResponse;
+import com.example.project.data.board.CommentData;
+import com.example.project.data.user.JoinData;
+import com.example.project.data.board.PostRegData;
+import com.example.project.data.user.UpdateData;
+import com.example.project.data.user.UserData;
+import com.example.project.response.board.CommentResponse;
+import com.example.project.data.user.LoginData;
+import com.example.project.response.board.ListupResponse;
+import com.example.project.response.user.LoginResponse;
 import com.example.project.data.QrData;
-import com.example.project.response.PostResponse;
+import com.example.project.response.board.PostResponse;
 import com.example.project.response.QrResponse;
 import com.example.project.data.RegionData;
 import com.example.project.response.RegionResponse;
 import com.example.project.response.SubregionResponse;
+import com.example.project.response.user.UserinfoResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -30,7 +34,13 @@ public interface ServiceApi {
     Call<LoginResponse> userLogin(@Body LoginData data);
 
     @POST("/user/join")
-    Call<JoinResponse> userJoin(@Body JoinData data);
+    Call<UserinfoResponse> userJoin(@Body JoinData data);
+
+    @PUT("/user/update")
+    Call<UserinfoResponse> userInfoUpdate(@Body UpdateData data);
+
+    @DELETE("/user/exit/{email}")
+    Call<ResponseBody> userExit(@Path("email") String email);
 
 
     // QR

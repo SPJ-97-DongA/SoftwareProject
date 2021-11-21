@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BFEAFF"
-    tools:context=".activity.JoinActivity">
+    tools:context=".activity.user.JoinActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

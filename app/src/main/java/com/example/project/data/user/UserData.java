@@ -1,4 +1,4 @@
-package com.example.project.data;
+package com.example.project.data.user;
 
 import java.io.Serializable;
 

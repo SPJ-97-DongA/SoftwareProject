@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.project.R;
-import com.example.project.data.CommentData;
+import com.example.project.data.board.CommentData;
 
 import java.util.ArrayList;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MemberActivity"
+    tools:context=".activity.user.MemberActivity"
     android:orientation="vertical"
     android:weightSum="10">
     <LinearLayout
@@ -66,15 +66,15 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.2">
                     </LinearLayout>
-                    <EditText
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="9.8"
                         android:background="@null"
-                        android:text="elfn7397@naver.com"
+                        android:text="email"
                         android:gravity="center_vertical"
                         android:id="@+id/memberCurrentEmail">
-                    </EditText>
+                    </TextView>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
@@ -100,7 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3.5"
-            android:text="이름"
+            android:text="닉네임"
             android:textColor="#000000"
             android:gravity="center_vertical"
             android:textSize="20sp">
@@ -144,7 +144,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="9.8"
                         android:background="@null"
-                        android:text="안명수"
+                        android:text="ddings"
                         android:gravity="center_vertical"
                         android:id="@+id/memberName">
                     </EditText>
@@ -219,7 +219,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="9.8"
                         android:background="@null"
-                        android:text="baboAhn"
+                        android:text=""
                         android:gravity="center_vertical"
                         android:id="@+id/memberCurrentPw">
                     </EditText>
@@ -344,6 +344,7 @@
                 <Button
                     android:textSize="16sp"
                     android:backgroundTint="#ED3B3B"
+                    android:id="@+id/memberSubmit"
                     android:text="변경"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

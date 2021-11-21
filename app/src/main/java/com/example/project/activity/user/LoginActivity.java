@@ -1,4 +1,4 @@
-package com.example.project.activity;
+package com.example.project.activity.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +12,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
-import com.example.project.data.LoginData;
-import com.example.project.data.UserData;
-import com.example.project.response.LoginResponse;
+import com.example.project.activity.MainActivity;
+import com.example.project.data.user.LoginData;
+import com.example.project.data.user.UserData;
+import com.example.project.response.user.LoginResponse;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 
@@ -35,10 +36,10 @@ public class LoginActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mEmailView = (EditText) findViewById(R.id.login_email);
-        mPasswordView = (EditText) findViewById(R.id.login_password);
-        mEmailLoginButton = (Button) findViewById(R.id.login_button);
-        mJoinButton = (Button) findViewById(R.id.join_button);
+        mEmailView = findViewById(R.id.login_email);
+        mPasswordView = findViewById(R.id.login_password);
+        mEmailLoginButton = findViewById(R.id.login_button);
+        mJoinButton = findViewById(R.id.join_button);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -52,6 +53,15 @@ public class LoginActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mEmailView.setText(null);
+        mPasswordView.setText(null);
+
+        mEmailView.requestFocus();
     }
 
     private void attemptLogin() {

@@ -1,4 +1,4 @@
-package com.example.project.data;
+package com.example.project.data.board;
 
 import com.google.gson.annotations.SerializedName;
 

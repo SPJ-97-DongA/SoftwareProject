@@ -1,4 +1,4 @@
-package com.example.project.response;
+package com.example.project.response.user;
 
 import com.google.gson.annotations.SerializedName;
 

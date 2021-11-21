@@ -1,4 +1,4 @@
-package com.example.project.response;
+package com.example.project.response.board;
 
 import com.google.gson.annotations.SerializedName;
 

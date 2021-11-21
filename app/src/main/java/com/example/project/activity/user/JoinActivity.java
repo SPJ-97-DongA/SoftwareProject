@@ -1,4 +1,4 @@
-package com.example.project.activity;
+package com.example.project.activity.user;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +13,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project.R;
-import com.example.project.data.JoinData;
-import com.example.project.response.JoinResponse;
+import com.example.project.data.user.JoinData;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
+import com.example.project.response.user.UserinfoResponse;
 
 import java.util.regex.Pattern;
 
@@ -40,12 +40,12 @@ public class JoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        mEmailView = (EditText) findViewById(R.id.join_email);
-        mPasswordView = (EditText) findViewById(R.id.join_password);
-        mPasswordViewConfirm = (EditText) findViewById(R.id.join_password_confirm);
-        mNameView = (EditText) findViewById(R.id.join_name);
-        mJoinButton = (Button) findViewById(R.id.join_button);
-        mCancelButton = (Button) findViewById(R.id.cancel_button);
+        mEmailView = findViewById(R.id.join_email);
+        mPasswordView = findViewById(R.id.join_password);
+        mPasswordViewConfirm = findViewById(R.id.join_password_confirm);
+        mNameView = findViewById(R.id.join_name);
+        mJoinButton = findViewById(R.id.join_button);
+        mCancelButton = findViewById(R.id.cancel_button);
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
         mJoinButton.setOnClickListener(v -> attemptJoin());
@@ -122,11 +122,11 @@ public class JoinActivity extends AppCompatActivity {
     }
 
     private void startJoin(JoinData data) {
-        service.userJoin(data).enqueue(new Callback<JoinResponse>() {
+        service.userJoin(data).enqueue(new Callback<UserinfoResponse>() {
 
             @Override
-            public void onResponse(Call<JoinResponse> call, Response<JoinResponse> response) {
-                    JoinResponse result = response.body();
+            public void onResponse(Call<UserinfoResponse> call, Response<UserinfoResponse> response) {
+                UserinfoResponse result = response.body();
                     Toast.makeText(JoinActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
 
                     if (result.getCode() == 200) {
@@ -135,7 +135,7 @@ public class JoinActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<JoinResponse> call, Throwable t) {
+            public void onFailure(Call<UserinfoResponse> call, Throwable t) {
                 Toast.makeText(JoinActivity.this, "회원가입 에러 발생", Toast.LENGTH_SHORT).show();
                 Log.e("회원가입 에러 발생", t.getMessage());
                 t.printStackTrace();

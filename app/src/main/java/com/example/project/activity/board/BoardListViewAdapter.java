@@ -11,10 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.project.R;
-import com.example.project.data.PostData;
+import com.example.project.data.board.PostData;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class BoardListViewAdapter extends BaseAdapter {
 
