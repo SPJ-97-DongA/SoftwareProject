@@ -165,7 +165,7 @@ public class BoardListActivity extends AppCompatActivity {
                 mDate.setText(result.getDateTime());
                 mContents.setText(result.getContents());
 
-                commentUpdate(post_id);
+                commentUpdate(post_id, false);
             }
 
             @Override
@@ -181,7 +181,7 @@ public class BoardListActivity extends AppCompatActivity {
         service.writeComment(data).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                commentUpdate(data.getId());
+                commentUpdate(data.getId(), true);
             }
 
             @Override
@@ -192,7 +192,7 @@ public class BoardListActivity extends AppCompatActivity {
     }
 
     //댓글 목록 갱신
-    public void commentUpdate(int post_id){
+    public void commentUpdate(int post_id, boolean WRITE){
         service.commentUpdate(post_id).enqueue(new Callback<CommentResponse>() {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -213,7 +213,8 @@ public class BoardListActivity extends AppCompatActivity {
                     }
 
                     commentAdapter.notifyDataSetChanged();
-                    commentListView.setSelection(commentAdapter.getCount() - 1);
+                    if(WRITE)commentListView.setSelection(commentAdapter.getCount() - 1);
+                    else commentListView.setSelection(0);
                 }
 
             }
