@@ -1,9 +1,8 @@
-package com.example.project.response;
+package com.example.project.response.user;
 
 import com.google.gson.annotations.SerializedName;
 
-public class JoinResponse {
-
+public class UserinfoResponse {
     @SerializedName("code")
     private int code;
 

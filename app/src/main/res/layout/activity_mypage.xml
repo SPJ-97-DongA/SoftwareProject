@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MypageActivity"
+    tools:context=".activity.user.MypageActivity"
     android:orientation="vertical"
     android:weightSum="10">
     <LinearLayout
@@ -103,7 +103,7 @@
                 android:textColor="#000000">
             </TextView>
             <Button
-                android:id="@+id/mypageSubmit"
+                android:id="@+id/mypagePointUse"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -149,6 +149,7 @@
             android:textSize="25sp">
         </TextView>
         <TextView
+            android:id="@+id/exitService"
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"

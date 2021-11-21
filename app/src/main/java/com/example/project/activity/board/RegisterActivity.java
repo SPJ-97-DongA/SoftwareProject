@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.project.R;
-import com.example.project.data.PostRegData;
-import com.example.project.data.UserData;
+import com.example.project.data.board.PostRegData;
+import com.example.project.data.user.UserData;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
 

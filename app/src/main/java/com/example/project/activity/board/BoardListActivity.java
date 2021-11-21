@@ -5,14 +5,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,12 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.R;
-import com.example.project.data.CommentData;
-import com.example.project.data.UserData;
+import com.example.project.data.board.CommentData;
+import com.example.project.data.user.UserData;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
-import com.example.project.response.CommentResponse;
-import com.example.project.response.PostResponse;
+import com.example.project.response.board.CommentResponse;
+import com.example.project.response.board.PostResponse;
 
 import java.util.Collections;
 import java.util.Comparator;

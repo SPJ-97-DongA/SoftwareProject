@@ -1,6 +1,6 @@
-package com.example.project.response;
+package com.example.project.response.board;
 
-import com.example.project.data.PostData;
+import com.example.project.data.board.PostData;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

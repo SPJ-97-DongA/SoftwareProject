@@ -8,26 +8,20 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.project.R;
-import com.example.project.data.PostData;
-import com.example.project.data.RegionData;
-import com.example.project.data.UserData;
+import com.example.project.data.board.PostData;
+import com.example.project.data.user.UserData;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
-import com.example.project.response.ListupResponse;
+import com.example.project.response.board.ListupResponse;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
