@@ -15,9 +15,6 @@ public class PointActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_point);
-
-
-
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
