@@ -1,5 +1,6 @@
 package com.example.project.activity.user;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class MypageActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +55,14 @@ public class MypageActivity extends AppCompatActivity {
         infoReload();
 
         mypageChange = findViewById(R.id.mypageChange);
-        mypageChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MemberActivity.class);
-                intent.putExtra("userInfo", userInfo);
-                startActivity(intent);
-            }
+        mypageChange.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), MemberActivity.class);
+            intent.putExtra("userInfo", userInfo);
+            startActivity(intent);
         });
 
         mypageLogout = findViewById(R.id.mypageLogout);
-        mypageLogout.setOnClickListener(v -> {
-            GotoHome();
-        });
+        mypageLogout.setOnClickListener(v -> GotoHome());
 
         exit = findViewById(R.id.exitService);
         exit.setOnClickListener(v->{
@@ -74,10 +71,12 @@ public class MypageActivity extends AppCompatActivity {
         });
 
         pUsePoint.setOnClickListener(v->{
-
+            Intent intent = new Intent(this, PointActivity.class);
+            startActivity(intent);
         });
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
     }
 

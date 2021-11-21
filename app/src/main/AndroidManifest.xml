@@ -15,6 +15,10 @@
         android:theme="@style/Theme.Project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.user.PointActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"
+            android:exported="false" />
+        <activity
             android:name=".activity.board.BoardSearchActivity"
             android:exported="false" />
         <activity
