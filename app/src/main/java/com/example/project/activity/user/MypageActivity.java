@@ -1,5 +1,6 @@
 package com.example.project.activity.user;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -34,6 +35,7 @@ public class MypageActivity extends AppCompatActivity {
     private ServiceApi service;
 
     private UserData userInfo;
+
 
 
 
@@ -74,10 +76,12 @@ public class MypageActivity extends AppCompatActivity {
         });
 
         pUsePoint.setOnClickListener(v->{
-
+            Intent intent = new Intent(this, PointActivity.class);
+            startActivity(intent);
         });
 
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
     }
 
