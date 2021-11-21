@@ -1,4 +1,4 @@
-package com.example.project.activity.board;
+package com.example.project.activity.adapter;
 
 import android.content.Context;
 import android.os.Build;
@@ -13,20 +13,25 @@ import androidx.annotation.RequiresApi;
 import com.example.project.R;
 import com.example.project.data.board.PostData;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class BoardListViewAdapter extends BaseAdapter {
+public class SearchAdapter extends BaseAdapter {
 
     private TextView titleTextView;
     private TextView contentTextView;
 
-    private ArrayList<PostData> listViewItemList = new ArrayList<PostData>();
+    private List<PostData> listViewItemList;
     private Context context;
+    private ViewHolder viewHolder;
 
-    public BoardListViewAdapter(Context context){
+    public SearchAdapter(List<PostData> listViewItemList, Context context){
+        this.listViewItemList = listViewItemList;
         this.context = context;
     }
 
+    public void setListViewItemList(List<PostData> list){
+        this.listViewItemList = list;
+    }
 
     @Override
     public int getCount() { return listViewItemList.size(); }
@@ -46,16 +51,17 @@ public class BoardListViewAdapter extends BaseAdapter {
 
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_item, parent, false);
+            convertView = inflater.inflate(R.layout.row_listview, parent, false);
+
+            viewHolder = new ViewHolder();
+            viewHolder.label = convertView.findViewById(R.id.label);
+
+            convertView.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        titleTextView = convertView.findViewById(R.id.title);
-        contentTextView = convertView.findViewById(R.id.content);
-
-        PostData data = listViewItemList.get(position);
-
-        titleTextView.setText(data.getTitle());
-        contentTextView.setText(data.getContents());
+        viewHolder.label.setText(listViewItemList.get(position).getTitle());
 
         return convertView;
     }
@@ -72,5 +78,9 @@ public class BoardListViewAdapter extends BaseAdapter {
 
     public int getSize(){
         return listViewItemList.size();
+    }
+
+    class ViewHolder{
+        public TextView label;
     }
 }

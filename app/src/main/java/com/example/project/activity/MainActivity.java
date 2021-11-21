@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.project.R;
 import com.example.project.activity.board.BoardActivity;
 import com.example.project.activity.board.BoardListActivity;
-import com.example.project.activity.board.BoardListViewAdapter;
+import com.example.project.activity.adapter.BoardListViewAdapter;
 import com.example.project.activity.user.MypageActivity;
 import com.example.project.data.board.PostData;
 import com.example.project.data.QrData;

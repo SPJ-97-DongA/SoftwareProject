@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.project.R;
+import com.example.project.activity.adapter.BoardListViewAdapter;
 import com.example.project.data.board.PostData;
 import com.example.project.data.user.UserData;
 import com.example.project.network.RetrofitClient;
@@ -20,6 +21,7 @@ import com.example.project.network.ServiceApi;
 import com.example.project.response.board.ListupResponse;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
@@ -79,7 +81,12 @@ public class BoardActivity extends AppCompatActivity {
 
         //검색
         mSearch.setOnClickListener( v -> {
+            Intent search_itt = new Intent(getApplicationContext(), BoardSearchActivity.class);
+            search_itt.putExtra("boardList", (Serializable) adapter.getList());
+            search_itt.putExtra("userInfo", userInfo);
+            search_itt.putExtra("type", type);
 
+            startActivity(search_itt);
         });
 
         //새로고침
@@ -137,5 +144,4 @@ public class BoardActivity extends AppCompatActivity {
             }
         });
     }
-
 }
