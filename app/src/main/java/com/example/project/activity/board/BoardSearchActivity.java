@@ -62,6 +62,7 @@ public class BoardSearchActivity extends AppCompatActivity {
 
 
 
+        //검색창 입력
         editSearch = findViewById(R.id.searchText);
         editSearch.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         editSearch.addTextChangedListener(new TextWatcher() {
@@ -82,6 +83,7 @@ public class BoardSearchActivity extends AppCompatActivity {
             }
         });
 
+        // 글 클릭
         listView.setOnItemClickListener((parent, view, position, id) -> {
             PostData data = (PostData) parent.getItemAtPosition(position);
 
@@ -91,6 +93,11 @@ public class BoardSearchActivity extends AppCompatActivity {
 
             startActivity(post_intent);
         });
+
+
+        //뒤로가기
+        findViewById(R.id.searchBack).setOnClickListener( v -> finish());
+
     }
 
 
