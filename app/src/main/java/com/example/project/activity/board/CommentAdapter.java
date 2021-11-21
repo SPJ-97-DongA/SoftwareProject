@@ -57,7 +57,11 @@ public class CommentAdapter extends BaseAdapter {
         writerView.setText(data.getWriter());
         commentView.setText(data.getComment());
 
-
+        int height = 0;
+        height += writerView.getMeasuredHeight();
+        height += commentView.getMeasuredHeight();
+        height += 100;
+        convertView.setMinimumHeight(height);
         return convertView;
     }
 
