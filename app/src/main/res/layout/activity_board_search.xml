@@ -59,6 +59,7 @@
                             android:layout_weight="1.5">
                         </LinearLayout>
                         <ImageButton
+                            android:id="@+id/searchBack"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="8.5"
@@ -88,6 +89,7 @@
                         android:layout_weight="1">
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/searchText"
                         android:background="@null"
                         android:hint="검색할 단어를 입력하세요."
                         android:gravity="center_vertical"
@@ -115,6 +117,7 @@
         </LinearLayout>
     </LinearLayout>
     <ListView
+        android:id="@+id/searchList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9.2">

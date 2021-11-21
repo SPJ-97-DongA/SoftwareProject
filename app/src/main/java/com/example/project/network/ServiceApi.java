@@ -60,9 +60,13 @@ public interface ServiceApi {
     @GET("/board")
     Call<ListupResponse> ListUP(@Query("type") String type, @Query("end") int end);
 
-    //게시판 글 불러오기
+    //게시판목록 누른 글 불러오기
     @GET("/board/posts")
     Call<PostResponse> viewPOST(@Query("id") int post_id);
+
+    //게시판 검색
+    @GET("/board/search")
+    Call<PostResponse> searchPOST(@Query("type") String type, @Query("text") String text);
 
     //글 댓글 불러오기
     @GET("/board/posts/comment")

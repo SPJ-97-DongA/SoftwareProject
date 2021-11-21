@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.R;
+import com.example.project.activity.adapter.CommentAdapter;
 import com.example.project.data.board.CommentData;
 import com.example.project.data.user.UserData;
 import com.example.project.network.RetrofitClient;

@@ -1,4 +1,4 @@
-package com.example.project.activity.board;
+package com.example.project.activity.adapter;
 
 import android.content.Context;
 import android.os.Build;
