@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BFEAFF"
+    android:background="#FFFFFF"
     tools:context=".activity.user.JoinActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,17 +16,22 @@
         android:background="#FFFFFF"
         android:weightSum="10"
         android:orientation="vertical">
-        <!-- 1.5 -->    <LinearLayout
-        android:background="#BFEAFF"
+        <!-- 1.5 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3">
+        </LinearLayout>
+        <TextView
+            android:text="회원가입"
+            android:gravity="center"
+            android:textSize="25sp"
+        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5">
-    </LinearLayout>
-        <!-- 0.3 -->    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3">
-    </LinearLayout>
+        </TextView>
+        <!-- 0.3 -->
         <!-- 1.2 -->    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -162,7 +167,7 @@
         <!-- 0.2 -->    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2">
+        android:layout_weight="0.5">
     </LinearLayout>
         <!-- 1-->    <LinearLayout
         android:layout_width="match_parent"
@@ -177,7 +182,7 @@
         </LinearLayout>
         <Button
             android:id="@+id/join_button"
-            android:background="#BFEAFF"
+            android:backgroundTint="#ED3B3B"
             android:textSize="22sp"
             android:text="회원가입"
             android:gravity="center"
@@ -192,7 +197,7 @@
         </LinearLayout>
         <Button
             android:id="@+id/cancel_button"
-            android:background="#BFEAFF"
+            android:backgroundTint="#ED3B3B"
             android:textSize="22sp"
             android:text="취소"
             android:gravity="center"
@@ -214,8 +219,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.2"
-            android:background="#BFEAFF">
+            android:layout_weight="2"
+            android:background="#FFFFFF">
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
