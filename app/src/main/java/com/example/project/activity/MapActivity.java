@@ -4,8 +4,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +17,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.project.R;
+import com.example.project.activity.adapter.RecycleViewAdapter;
 import com.example.project.data.RegionData;
+import com.example.project.data.RegionDetailData;
 import com.example.project.response.RegionResponse;
 import com.example.project.response.SubregionResponse;
 import com.example.project.network.RetrofitClient;
@@ -42,19 +47,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private List<String> list;
 
     private ListView placeListview;
-
     private MapView mapView;
+
+    private Marker mark;
 
     private Context context;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
-
     private FusedLocationSource locationSource;
-
     private NaverMap naverMap;
-
     private ServiceApi service;
 
+    private RecycleViewAdapter recycleViewAdapter;
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+        super.startActivityForResult(intent, requestCode, options);
+        Intent preIntent = getIntent();
+        onMapMove(mark, preIntent.getDoubleExtra("latitude", 0.0), preIntent.getDoubleExtra("longitude", 0.0));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,18 +149,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 // 지역 셋팅 리스트뷰 좌측 띄우기
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
                 listView.setAdapter(adapter);
-                placeListview = findViewById(R.id.placeListview);
 
 
-                // 다른 광광지 리스트
+                // 다른 관광지 리스트
                 listView.setOnItemClickListener((adapterView, view, position, l) -> {
                     String data = (String) adapterView.getItemAtPosition(position);
-                    Marker Mark = new Marker();
+                    mark = new Marker();
 
                     Optional<RegionData> region = regionlist.stream().filter(s -> s.getName().equals(data)).findFirst();
                     RegionData rg = region.get();
 
-                    subregionUpdate(Mark, rg, rg.getLatitude(), rg.getLongitude());
+                    subregionUpdate(rg, rg.getLatitude(), rg.getLongitude());
                 });
 
             }
@@ -163,32 +173,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     // 지역별 명소위치 호출
-    public void subregionUpdate(Marker mark, RegionData data, double latitude, double longitude){
+    public void subregionUpdate(RegionData data, double latitude, double longitude){
         service.callSubregionList(data).enqueue(new Callback<SubregionResponse>() {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<SubregionResponse> call, Response<SubregionResponse> response) {
-                SubregionResponse result = response.body();
-                List<RegionData> subregionList = result.getSubregionList();
-                List<String> subregion = new ArrayList<>();
-
-                for (RegionData item : subregionList) {
-                    subregion.add(item.getName());
-                }
-
-                ArrayAdapter<String> subAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, subregion);
-                placeListview.setAdapter(subAdapter);
-
                 onCamSetting(latitude, longitude);
 
-                placeListview.setOnItemClickListener((adapterView1, view1, position1, l1) -> {
-                    String regionName = (String) adapterView1.getItemAtPosition(position1);
+                SubregionResponse result = response.body();
+                List<RegionDetailData> subregionList = result.getSubregionList();
 
-                    Optional<RegionData> item = subregionList.stream().filter(s -> s.getName().equals(regionName)).findFirst();
-                    onMapMove(mark, item.get().getLatitude(), item.get().getLongitude());
-                });
+                RecyclerView recyclerView = findViewById(R.id.placeListview);
 
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MapActivity.this);
+                recyclerView.setLayoutManager(linearLayoutManager);
+
+                recycleViewAdapter = new RecycleViewAdapter(subregionList, mark, naverMap);
+                recyclerView.setAdapter(recycleViewAdapter);
             }
 
             @Override

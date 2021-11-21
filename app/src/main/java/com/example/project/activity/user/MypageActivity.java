@@ -55,19 +55,14 @@ public class MypageActivity extends AppCompatActivity {
         infoReload();
 
         mypageChange = findViewById(R.id.mypageChange);
-        mypageChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MemberActivity.class);
-                intent.putExtra("userInfo", userInfo);
-                startActivity(intent);
-            }
+        mypageChange.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), MemberActivity.class);
+            intent.putExtra("userInfo", userInfo);
+            startActivity(intent);
         });
 
         mypageLogout = findViewById(R.id.mypageLogout);
-        mypageLogout.setOnClickListener(v -> {
-            GotoHome();
-        });
+        mypageLogout.setOnClickListener(v -> GotoHome());
 
         exit = findViewById(R.id.exitService);
         exit.setOnClickListener(v->{
