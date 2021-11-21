@@ -50,15 +50,19 @@ public interface ServiceApi {
     @GET("/board")
     Call<ListupResponse> ListUP(@Query("type") String type, @Query("end") int end);
 
+    //게시판 글 불러오기
     @GET("/board/posts")
     Call<PostResponse> viewPOST(@Query("id") int post_id);
 
+    //글 댓글 불러오기
     @GET("/board/posts/comment")
     Call<CommentResponse> commentUpdate(@Query("post_id") int post_id);
 
+    //글 작성하기
     @POST("/board/write")
     Call<ResponseBody> writePOST(@Body PostRegData data);
 
+    //댓글 작성하기
     @POST("/board/posts/write")
     Call<ResponseBody> writeComment(@Body CommentData data);
 }
