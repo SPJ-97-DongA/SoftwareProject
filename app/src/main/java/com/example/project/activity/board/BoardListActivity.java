@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.project.R;
 import com.example.project.data.CommentData;
@@ -50,12 +52,16 @@ public class BoardListActivity extends AppCompatActivity {
 
     private Button commentSubmit;
 
+    private ImageButton mRefresh;
     private ImageButton boardlistThreedots;
 
     private int post_id;
     private UserData userInfo;
     private CommentAdapter commentAdapter;
     private ServiceApi service;
+
+    private String postOwner;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,50 +81,64 @@ public class BoardListActivity extends AppCompatActivity {
         mDate = findViewById(R.id.boardlistTime);
         mContents = findViewById(R.id.boardlistContent);
         boardlistThreedots = findViewById(R.id.boardlistThreedots);
+        mRefresh = findViewById(R.id.boardlistRefresh);
 
-        boardlistThreedots.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
-                MenuInflater inf = popupMenu.getMenuInflater();
-                inf.inflate(R.menu.menu_boardlist, popupMenu.getMenu());
-                popupMenu.show();
-            }
+        //글 불러오기
+        viewPOST(post_id);
+
+        //새로고침
+        mRefresh.setOnClickListener(v -> {
+            viewPOST(post_id);
         });
 
+        //뒤로가기
+        findViewById(R.id.boardlistBack).setOnClickListener(v -> finish());
 
+        //댓글 작성
         commentListView = findViewById(R.id.commentListview);
         commentListView.setAdapter(commentAdapter);
 
         mComment = findViewById(R.id.boardlistComment);
         commentSubmit = findViewById(R.id.commentSubmit);
 
-        viewPOST(post_id);
+        commentSubmit.setOnClickListener(v -> writeComment(new CommentData(post_id, userInfo.getName(), mComment.getText().toString())));
 
-        commentSubmit.setOnClickListener(v-> writeComment(new CommentData(post_id, userInfo.getName(), mComment.getText().toString())) );
+        //글 삭제, 수정
+        boardlistThreedots.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
+            MenuInflater inf = popupMenu.getMenuInflater();
+            inf.inflate(R.menu.menu_boardlist, popupMenu.getMenu());
+            popupMenu.show();
+        });
 
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_boardlist, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId())
-        {
-            case R.id.menuBoardlist1:
-                return true;
-            case R.id.menuBoardlist2:
-                return true;
-        }
+
+        if(postOwner.equals(userInfo.getName())) {
+            switch (item.getItemId()) {
+                case R.id.menuBoardlist1:
+                    return true;
+                case R.id.menuBoardlist2:
+                    return true;
+            }
+        }else Toast.makeText(this, "올바른 접근권한이 아닙니다.", Toast.LENGTH_SHORT).show();
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -138,6 +158,8 @@ public class BoardListActivity extends AppCompatActivity {
                 }
 
                 mBoardName.setText(boardName);
+
+                postOwner = result.getEmail();
                 mUsername.setText(result.getWriter());
                 mTitle.setText(result.getTitle());
                 mDate.setText(result.getDateTime());
@@ -154,6 +176,7 @@ public class BoardListActivity extends AppCompatActivity {
         });
     }
 
+    //댓글 작성
     public void writeComment(CommentData data){
         service.writeComment(data).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -168,6 +191,7 @@ public class BoardListActivity extends AppCompatActivity {
         });
     }
 
+    //댓글 목록 갱신
     public void commentUpdate(int post_id){
         service.commentUpdate(post_id).enqueue(new Callback<CommentResponse>() {
 
@@ -183,11 +207,13 @@ public class BoardListActivity extends AppCompatActivity {
                     Collections.sort(commentList, Comparator.comparing(CommentData::getCreatedAt));
 
                     for(CommentData item : commentList) {
-                        if(!commentAdapter.findDup(item))
+                        if(!commentAdapter.findDup(item)) {
                             commentAdapter.addItem(item);
+                        }
                     }
 
                     commentAdapter.notifyDataSetChanged();
+                    commentListView.setSelection(commentAdapter.getCount() - 1);
                 }
 
             }

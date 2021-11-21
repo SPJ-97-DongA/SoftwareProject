@@ -12,7 +12,6 @@ import androidx.annotation.RequiresApi;
 
 import com.example.project.R;
 import com.example.project.data.CommentData;
-import com.example.project.data.PostData;
 
 import java.util.ArrayList;
 
@@ -57,6 +56,7 @@ public class CommentAdapter extends BaseAdapter {
 
         writerView.setText(data.getWriter());
         commentView.setText(data.getComment());
+
 
         return convertView;
     }

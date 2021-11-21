@@ -10,6 +10,9 @@ public class PostResponse {
     @SerializedName("writer")
     String writer;
 
+    @SerializedName("email")
+    String email;
+
     @SerializedName("title")
     String title;
 
@@ -24,6 +27,10 @@ public class PostResponse {
 
     public String getWriter() {
         return writer;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getTitle() {
