@@ -1,12 +1,18 @@
 package com.example.project.activity.board;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.project.R;
 import com.example.project.data.board.PostRegData;
@@ -27,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mContents;
     private Button mSubmit;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mTitle = findViewById(R.id.post_Title);
         mContents = findViewById(R.id.post_Content);
-        mSubmit = findViewById(R.id.submitButton);
 
+        mSubmit = findViewById(R.id.submitButton);
         mSubmit.setOnClickListener(v -> {
             String title = mTitle.getText().toString();
             String contents = mContents.getText().toString();
@@ -47,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             wirtePOST(new PostRegData(type, title, contents, userInfo.getName(), userInfo.getEmail()));
         });
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

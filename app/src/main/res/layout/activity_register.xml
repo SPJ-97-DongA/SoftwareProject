@@ -180,7 +180,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.7"
-                android:background="@drawable/clip_icon"></ImageButton>
+                android:background="@drawable/clip_icon"/>
         </LinearLayout>
     </LinearLayout>
 
