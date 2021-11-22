@@ -31,18 +31,26 @@ import retrofit2.http.Query;
 
 public interface ServiceApi {
 
-    //회원가입, 로그인
+    //로그인
     @POST("/user/login")
     Call<LoginResponse> userLogin(@Body LoginData data);
 
+    //회원가입
     @POST("/user/join")
     Call<UserinfoResponse> userJoin(@Body JoinData data);
 
+    //업데이트
     @PUT("/user/update")
     Call<UserinfoResponse> userInfoUpdate(@Body UpdateData data);
 
+    //탈퇴
     @DELETE("/user/exit/{email}")
     Call<ResponseBody> userExit(@Path("email") String email);
+
+    //정보 호출
+    @GET("/user/info")
+    Call<LoginResponse> getCurrentInfo(@Query("email") String email);
+
 
 
     // QR

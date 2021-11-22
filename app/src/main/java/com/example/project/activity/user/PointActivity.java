@@ -1,19 +1,30 @@
 package com.example.project.activity.user;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project.R;
 import com.example.project.activity.QrCreateActivity;
 import com.example.project.data.user.UserData;
+import com.example.project.network.RetrofitClient;
+import com.example.project.network.ServiceApi;
+import com.example.project.response.user.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PointActivity extends AppCompatActivity {
 
@@ -22,7 +33,6 @@ public class PointActivity extends AppCompatActivity {
     private Button mSubmit;
 
     private UserData userInfo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +66,16 @@ public class PointActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(this, QrCreateActivity.class);
                     intent.putExtra("paypoint", paypoint);
+                    intent.putExtra("userInfo", userInfo);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
 
+        ImageButton back = findViewById(R.id.pointCross);
+        back.setOnClickListener(v->finish());
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -72,7 +85,6 @@ public class PointActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
 //    @Override
 //    public void onBackPressed() {

@@ -1,5 +1,6 @@
 package com.example.project.activity.user;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import com.example.project.R;
 import com.example.project.data.user.UserData;
 import com.example.project.network.RetrofitClient;
 import com.example.project.network.ServiceApi;
+import com.example.project.response.user.LoginResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,9 +38,6 @@ public class MypageActivity extends AppCompatActivity {
 
     private UserData userInfo;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +50,6 @@ public class MypageActivity extends AppCompatActivity {
         email = findViewById(R.id.mypageEmail);
         point = findViewById(R.id.mypagePoint);
         pUsePoint = findViewById(R.id.mypagePointUse);
-
-        infoReload();
 
         mypageChange = findViewById(R.id.mypageChange);
         mypageChange.setOnClickListener(view -> {
@@ -79,6 +76,29 @@ public class MypageActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getCurrentInfo(userInfo.getEmail());
+    }
+
+    private void getCurrentInfo(String email) {
+        service.getCurrentInfo(email).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse result = response.body();
+
+                userInfo.setPoint(result.getPoint());
+                infoReload();
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Log.e("서버 통신 실패", t.getMessage());
+            }
+        });
     }
 
     public void ServiceExit(String email){
