@@ -63,10 +63,6 @@ public class MainActivity extends FragmentActivity {
 
         Setting();
 
-        listUP("free", 0, freeAdapter);
-        listUP("region", 0, regionAdapter);
-        listUP("point", 0, pointAdapter);
-
         mMap.setOnClickListener(v -> {
             intent = new Intent(getApplicationContext(), MapActivity.class);
             startActivity(intent);
@@ -105,10 +101,23 @@ public class MainActivity extends FragmentActivity {
         });
 
         /* 리스트뷰 클릭 이벤트 */
-        freeList.setOnItemClickListener((parent, view, position, id) -> listClickEvent(parent, position));
-        regionList.setOnItemClickListener((parent, view, position, id) -> listClickEvent(parent, position));
-        pointList.setOnItemClickListener((parent, view, position, id) -> listClickEvent(parent, position));
+        freeList.setOnItemClickListener((parent, view, position, id) -> listClickEvent(parent, position, "free"));
+        regionList.setOnItemClickListener((parent, view, position, id) -> listClickEvent(parent, position, "region"));
+        pointList.setOnItemClickListener((parent, view, position, id) -> listClickEvent(parent, position, "point"));
 
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        freeAdapter.clear();
+        regionAdapter.clear();
+        pointAdapter.clear();
+
+        listUP("free", freeAdapter);
+        listUP("region", regionAdapter);
+        listUP("point",  pointAdapter);
     }
 
     @Override
@@ -148,8 +157,8 @@ public class MainActivity extends FragmentActivity {
         });
     }
 
-    public void listUP(String type, int end, BoardListViewAdapter adapter){
-        service.ListUP(type, end).enqueue(new Callback<ListupResponse>() {
+    public void listUP(String type, BoardListViewAdapter adapter){
+        service.ListUP(type).enqueue(new Callback<ListupResponse>() {
             @Override
             public void onResponse(Call<ListupResponse> call, Response<ListupResponse> response) {
                 ListupResponse result = response.body();
@@ -204,12 +213,13 @@ public class MainActivity extends FragmentActivity {
     }
 
 
-    public void listClickEvent(AdapterView<?> parent, int position){
+    public void listClickEvent(AdapterView<?> parent, int position, String type){
         PostData data = (PostData) parent.getItemAtPosition(position);
 
         Intent post_intent = new Intent(getApplicationContext(), BoardListActivity.class);
         post_intent.putExtra("post_id", data.getId());
         post_intent.putExtra("userInfo", userInfo);
+        post_intent.putExtra("type", type);
 
         startActivity(post_intent);
     }

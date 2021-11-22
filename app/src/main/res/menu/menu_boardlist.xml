@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menuBoardlist1"
+        android:id="@+id/post_update"
         android:title="글 수정"
         app:showAsAction="never">
     </item>
     <item
-        android:id="@+id/menuBoardlist2"
+        android:id="@+id/post_delete"
         android:title="글 삭제"
         app:showAsAction="never">
     </item>

@@ -7,18 +7,27 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.project.data.RegionDetailData;
 import com.example.project.data.user.UserData;
+import com.example.project.network.RetrofitClient;
+import com.example.project.network.ServiceApi;
+import com.example.project.response.SubregionResponse;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class QrActivity extends AppCompatActivity {
@@ -29,10 +38,23 @@ public class QrActivity extends AppCompatActivity {
 
     private UserData userInfo;
 
+    private ServiceApi service;
+
+    private LocationManager locationManager;
+    private Location lastKnownLocation;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        service = RetrofitClient.getClient().create(ServiceApi.class);
+
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        String locationProvider = LocationManager.GPS_PROVIDER;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
 
         intent = getIntent();
 
@@ -63,24 +85,17 @@ public class QrActivity extends AppCompatActivity {
                     obj = new JSONObject(result.getContents());
 
                     double mlat, mlng;
-                    
-                    //TODO 여기 고쳐야함
-                    double latitude = 35.791;
-                    double longitude = 129.33229;
 
-                    LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-                    String locationProvider = LocationManager.GPS_PROVIDER;
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+                    double lat = Double.parseDouble(obj.getString("latitude"));
+                    double lng = Double.parseDouble(obj.getString("longitude"));
+
                     if(lastKnownLocation != null){
                         mlat = lastKnownLocation.getLatitude();
                         mlng = lastKnownLocation.getLongitude();
 
-                        double distMeter = distance(mlat, mlng, latitude, longitude);
+                        double distMeter = distance(mlat, mlng, lat, lng);
 
-                        if(distMeter <= 50.0) {
+                        if(distMeter <= 200.0) {
                             point += Integer.parseInt(obj.getString("point"));
                             Toast.makeText(QrActivity.this, "스캔완료!", Toast.LENGTH_SHORT).show();
                         }else{

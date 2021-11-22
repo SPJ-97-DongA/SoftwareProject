@@ -77,4 +77,8 @@ public class BoardListViewAdapter extends BaseAdapter {
     public int getSize(){
         return listViewItemList.size();
     }
+
+    public void clear(){
+        listViewItemList.clear();
+    }
 }
