@@ -72,6 +72,7 @@ public class MypageActivity extends AppCompatActivity {
 
         pUsePoint.setOnClickListener(v->{
             Intent intent = new Intent(this, PointActivity.class);
+            intent.putExtra("userInfo", userInfo);
             startActivity(intent);
         });
 

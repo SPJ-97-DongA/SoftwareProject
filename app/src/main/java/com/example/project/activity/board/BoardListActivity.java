@@ -109,6 +109,32 @@ public class BoardListActivity extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(BoardListActivity.this, boardlistThreedots);
                 MenuInflater inf = popupMenu.getMenuInflater();
                 inf.inflate(R.menu.menu_boardlist, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId() == R.id.post_update){
+                            Intent intent1 = new Intent(getApplicationContext(), RegisterActivity.class);
+                            intent1.putExtra("title", mTitle.getText().toString());
+                            intent1.putExtra("content", mContents.getText().toString());
+                            intent1.putExtra("userInfo", userInfo);
+                            intent1.putExtra("post_id", post_id);
+
+                            String type = getIntent().getStringExtra("type");
+                            intent1.putExtra("type", type);
+
+                            startActivity(intent1);
+
+                            return true;
+                        }else if(item.getItemId() == R.id.post_delete){
+                            deletePost(post_id);
+                            finish();
+                            return true;
+                        }
+
+                        return false;
+                    }
+                });
                 popupMenu.show();
 
             } else Toast.makeText(this, "올바른 접근권한이 아닙니다.", Toast.LENGTH_SHORT).show();
@@ -121,6 +147,7 @@ public class BoardListActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        viewPOST(post_id);
     }
 
     @Override
@@ -130,21 +157,6 @@ public class BoardListActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-
-            switch (item.getItemId()) {
-                case R.id.menuBoardlist1:
-                    return true;
-                case R.id.menuBoardlist2:
-                    return true;
-            }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     // 글 불러오기
     public void viewPOST(int post_id){
@@ -227,6 +239,21 @@ public class BoardListActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<CommentResponse> call, Throwable t) {
                 Log.e("댓글 로딩에러", t.getMessage());
+            }
+        });
+    }
+
+
+    public void deletePost(int post_id){
+        service.deletePost(post_id).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Toast.makeText(getApplicationContext(), "글 삭제가 완료되었습니다.", Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("글 삭제에러", t.getMessage());
             }
         });
     }

@@ -16,6 +16,11 @@ public class PostData implements Serializable{
     @SerializedName("contents")
     private String contents;
 
+    public PostData(int id, String title, String contents) {
+        this.id = id;
+        this.title = title;
+        this.contents = contents;
+    }
 
     public int getId() {
         return id;

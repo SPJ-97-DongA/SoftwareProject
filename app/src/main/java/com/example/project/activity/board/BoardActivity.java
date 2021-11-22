@@ -91,8 +91,8 @@ public class BoardActivity extends AppCompatActivity {
 
         //새로고침
         mRefresh.setOnClickListener(v -> {
-            int end_id = adapter.getSize() - 1;
-            listUP(type, end_id);
+            adapter.clear();
+            listUP(type);
         });
 
         //뒤로가기
@@ -105,6 +105,7 @@ public class BoardActivity extends AppCompatActivity {
             Intent post_intent = new Intent(getApplicationContext(), BoardListActivity.class);
             post_intent.putExtra("post_id", data.getId());
             post_intent.putExtra("userInfo", userInfo);
+            post_intent.putExtra("type", type);
 
             startActivity(post_intent);
         });
@@ -113,16 +114,17 @@ public class BoardActivity extends AppCompatActivity {
         actionBar.hide();
     }
 
+
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        int end_id = adapter.getSize() - 1;
-        listUP(type, end_id);
+        adapter.clear();
+        listUP(type);
     }
 
     // 게시글 목록
-    public void listUP(String type, int end){
-        service.ListUP(type, end).enqueue(new Callback<ListupResponse>() {
+    public void listUP(String type){
+        service.ListUP(type).enqueue(new Callback<ListupResponse>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<ListupResponse> call, Response<ListupResponse> response) {
@@ -131,8 +133,7 @@ public class BoardActivity extends AppCompatActivity {
 
 
                 for(PostData item : boardList){
-                    if(!adapter.findID(item))
-                        adapter.addItem(item);
+                    adapter.addItem(item);
                 }
 
                 adapter.notifyDataSetChanged();

@@ -1,6 +1,8 @@
 package com.example.project.network;
 
+import com.example.project.data.RegionDetailData;
 import com.example.project.data.board.CommentData;
+import com.example.project.data.board.PostData;
 import com.example.project.data.user.JoinData;
 import com.example.project.data.board.PostRegData;
 import com.example.project.data.user.UpdateData;
@@ -56,9 +58,10 @@ public interface ServiceApi {
     Call<SubregionResponse> callSubregionList(@Body RegionData data);
 
 
+
     //게시판
     @GET("/board")
-    Call<ListupResponse> ListUP(@Query("type") String type, @Query("end") int end);
+    Call<ListupResponse> ListUP(@Query("type") String type);
 
     //게시판목록 누른 글 불러오기
     @GET("/board/posts")
@@ -81,6 +84,10 @@ public interface ServiceApi {
     Call<ResponseBody> writeComment(@Body CommentData data);
     
     //글 수정
-    
+    @PUT("/board/posts/update")
+    Call<ResponseBody> updatePost(@Body PostData data);
+
     //글 삭제
+    @DELETE("/board/posts/delete/{post_id}")
+    Call<ResponseBody> deletePost(@Path("post_id") int id);
 }
