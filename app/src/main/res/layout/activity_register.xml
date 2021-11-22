@@ -147,7 +147,7 @@
             android:layout_marginRight="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.9"
+            android:layout_weight="7.5"
             android:orientation="vertical"
             android:background="@drawable/border">
             <EditText
@@ -167,20 +167,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:orientation="horizontal"
-            android:weightSum="10">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4">
-            </LinearLayout>
-            <ImageButton
-                android:id="@+id/clipButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.7"
-                android:background="@drawable/clip_icon"></ImageButton>
+            android:layout_weight="0.5">
         </LinearLayout>
     </LinearLayout>
 
